@@ -1,0 +1,18 @@
+<!--<grafico datasource="manzo" ></grafico>-->
+<ion-view title="minidash" ng-init="init()" id="dash">
+    <ion-content scroll="true" overflow-scroll="true">
+<!--<button ng-click="init()">INIT</button>
+<button ng-click="clear()">CLEAR</button>-->
+<div class="row responsive-lg" >
+<div class="col col-33" ng-repeat="ch in charts">
+  <!--<canvas sheight="130" id="{{ch.evtype}}"  class="chart chart-line" chart-data="ch.chart.data" chart-labels="ch.chart.labels" chart-legend="true"
+                chart-series="ch.chart.series" chart-options="{showTooltips: true, legend: { display:true}}"></canvas>-->
+
+<iotchart datasource="ch"></iotchart>
+    </div>
+
+    </div>
+    <div style="width: 300px; height: 200px;" id="chartDiv"></div>
+    </ion-content>
+</ion-view>
+

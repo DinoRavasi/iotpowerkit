@@ -1,0 +1,38 @@
+<div layout="row" id="machine">
+  <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+    
+	<div style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      TASKs from Maximo
+    </div>
+    <section flex="50">
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto; height: 200px;">
+
+            </div>
+	</section>
+  </div> 
+  <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+	<div style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Spare Parts from Maximo
+    </div>
+    <section flex="50">
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto; height: 200px;">
+                <table border="1" width="100%">
+                    <tr ng-repeat="evl in anomalylogs.slice().reverse() track by $index" ng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                        <td>
+                            {{evl.True_start}}
+                        </td>
+                        
+                        <td>
+                            {{evl.glossary}}
+                        </td>
+                       
+                    </tr>
+                </table>
+            </div>
+	</section>
+
+  </div> 
+</div>
+
+
+

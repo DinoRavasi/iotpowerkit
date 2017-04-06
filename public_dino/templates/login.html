@@ -1,0 +1,69 @@
+<ion-view title="Login">
+  <ion-content scroll="true" overflow-scroll="true" ng-init="init()">
+  
+<link href="lib/textillate/animate.css" rel="stylesheet">
+<script src="lib/textillate/jquery.lettering-0.6.1.min.js"></script>
+<script src="lib/textillate/jquery.textillate.js"></script>
+
+        <div flex layout="row" style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #325c80; color: white">
+			&nbsp;<br><br>
+		</div>
+		
+
+    <div flex layout="row" style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #325c80; color: #000000">
+
+			<md-card flex class="boxtimeframe">
+                <md-card-header style="padding: 1px;">
+					&nbsp;
+                </md-card-header>
+            </md-card>
+
+			<md-card flex="50" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;">
+			
+			
+                <md-card-content>
+	<div class="row">
+		<div class="col text-center">
+			<img height="170" alt="BCRS" src="img/customerlogo_GD.jpg">	
+			<h1 class="tlt" style="color: #000000"><b>G.D Machine Monitoring</b></h1>
+						<h3 style="color: #E71D32">{{userlogged}}</h3>
+		</div>
+	</div>
+
+        
+          <form name="Form">
+            <md-input-container class="md-block">
+              <label>User ID</label>
+              <input type="text" name="email" ng-model="data.username" placeholder="Insert your User ID" required="" md-maxlength="50"/>
+              <div ng-messages="Form.email.$error" role="alert" multiple="">
+                <div ng-message="required" class="my-message">Please enter your user ID / email.</div>
+				<div ng-message="md-maxlength" class="my-message">Too long.</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Password</label>
+              <input type="password" name="password" ng-model="data.password" placeholder="Insert your Password" required="" md-maxlength="20"/>
+              <div ng-messages="Form.password.$error" role="alert" multiple="">
+                <div ng-message="required" class="my-message">Please enter your password.</div>
+                <div ng-message="md-maxlength" class="my-message">Too long.</div>
+              </div>
+            </md-input-container>
+            <md-button ng-disabled="!Form.$valid" ng-click="login()" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
+          </form>
+        </md-card-content>
+            </md-card>
+			<md-card flex class="boxtimeframe">
+                <md-card-header style="padding: 1px;">
+                    &nbsp;
+                </md-card-header>
+            </md-card>
+	</div>
+<script>
+$(function () {
+	$('.tlt').textillate({ in: { effect: 'flash' } });
+})
+</script>
+  </ion-content>
+</ion-view>
+
+

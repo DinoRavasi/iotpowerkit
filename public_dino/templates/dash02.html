@@ -1,0 +1,135 @@
+<div layout="row">
+  <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+    
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Anomaly Trend
+    </div>
+    <section flex="50">
+<canvas height="160" id="line" class="chart chart-line" chart-data="linedata" chart-labels="linelabels" chart-legend="true"
+                    chart-series="lineseries" chart-options="{showTooltips: true, legend: {display:false}}"></canvas>
+	
+	</section>
+  </div> 
+  <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Anomaly Log
+    </div>
+	
+<div class="col-md-12 well">
+    <table class="table table-scroll table-bordered">
+                    <thead>	
+                     <tr style="">
+                      
+                        <th style="width: 30%">Time</th>
+                        <th style="width: 70%">Glossary</th>
+                    </tr>
+					</thead>
+					<tbody>
+                    <tr ng-repeat="evl in anomalylog.slice().reverse() track by $index" sng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                        <td style="width: 30%">
+                            {{evl.True_start}}
+                        </td>
+                        
+                        <td style="width: 70%">
+                            {{evl.glossary}}
+                        </td>
+                       
+                    </tr>
+					</tbody>
+                </table>
+            </div>
+
+  </div> 
+</div>
+
+<md-card>
+<!-- GAUGE DEMETRIO
+<div layout="row">
+    
+	<div flex layout="row" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+
+		<div flex layout="column" ng-repeat="a in gauges">
+			<div style="text-align: center;font-weight: bold; font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #ffff; color: #000000">
+				{{a.data[0]}}
+			</div>
+			<section flex>
+	<canvas height="120" id="gauge" class="chart chart-doughnut" chart-colors="colors" chart-data="a.data" chart-options="a.options" chart-labels="a.labels"></canvas>
+
+			</section>
+				<div class="gauge-label" style="text-align: center">{{a.labels[0]}}</div>
+		</div>
+          
+	</div>
+  
+</div>
+-->
+<!-- GAUGE DINO -->
+<div layout="row">
+    
+	<div flex layout="row" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+
+		<div flex layout="column" ng-repeat="a in gauges">
+			<div style="text-align: center;font-weight: bold; font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #ffff; color: #000000">
+				{{a.data[0]}}
+			</div>
+			<section flex>
+
+<ridge-speedometer x-val="a.data[0]" x-conf="{size: 150, needleWidth:3, colorArcWidth: 20, needleBaseSize: 10, needleBaseColor1: 'black', needleBaseColor2:'black', edgeOuterColor: 'white', backgroundColor: 'white', markerColor: 'white', smallTickColor: 'white', smallTickIncrement: 2, largeTickColor: 'black'}" x-label="{{a.labels[0]}}"/>
+			</section>
+				
+		</div>
+          
+	</div>
+  
+</div>
+
+
+
+
+
+</md-card>
+
+<div layout="row" layout-sm="column" style="background: #ffffff;">
+   
+  <div flex="33" flex-sm="100" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+    
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Roll Force (Work Side and Drive Side)
+    </div>
+    <section flex="50">
+<canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[0].data" chart-labels="sensormeasurement[0].labels" chart-legend="false"
+                    chart-series="sensormeasurement[0].series" chart-options="{showTooltips: true, legend: { display: false}}"></canvas>
+	
+	</section>
+  </div> 
+  
+  <div flex="33" flex-sm="100" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+      
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Vibration Velocity (Main Motor)
+    </div>
+    <section flex="3">
+		<canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[1].data" chart-labels="sensormeasurement[1].labels" chart-legend="false"
+                    chart-series="sensormeasurement[1].series" chart-options="{showTooltips: true, legend: { display: false}}"></canvas>		
+	</section>
+   
+  </div> 
+
+<div flex="33" flex-sm="100" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Current (Main Motor)
+    </div>
+    <section flex="50">
+		<canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[1].data" chart-labels="sensormeasurement[1].labels" chart-legend="false"
+                    chart-series="sensormeasurement[1].series" chart-options="{showTooltips: true, legend: { display: false}}"></canvas>		
+	</section>
+
+  </div> 
+  
+  
+  </div>
+
+
+
+
+

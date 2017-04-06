@@ -1,0 +1,197 @@
+<md-dialog aria-label="Technical Screen" class="large-dialog">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: #ffffff">STOPS {{ctrl.parent.stops.rows.length}}</h2>
+                <span flex></span>
+               
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!-- INIZIO -->
+                <div layout="row" id="machine" xng-controller="MobileScreenController">
+                    <style>
+                        #dialogtable table,
+                        tablemaximo table {
+                            border-spacing: 0.5rem;
+                            border-collapse: collapse
+                        }
+                        
+                        #dialogtable td,
+                        th {
+                            border: 1px solid #999;
+                            padding: 0.5rem;
+                            text-align: left;
+                        }
+                        
+                        #tablemaximo td,
+                        tablemaximo th {
+                            font-size: 10px;
+                            border: 1px solid #999;
+                            padding: 0.5rem;
+                            text-align: left;
+                        }
+                        
+                        #dialogtable th,
+                        th {
+                            background: lightblue;
+                        }
+                    </style>
+                    <div flex layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+                        <div style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: white; color: black">Details
+                            <section flex>
+                                <div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto;">
+                                    <table border=0 cellpadding=0 cellspacing=0 width=1058 style='border-collapse:
+ collapse;table-layout:fixed;width:793pt'>
+ <col width=83 style='mso-width-source:userset;mso-width-alt:2645;width:62pt'>
+ <col width=47 style='mso-width-source:userset;mso-width-alt:1493;width:35pt'>
+ <col width=441 style='mso-width-source:userset;mso-width-alt:14122;width:331pt'>
+ <col width=101 style='mso-width-source:userset;mso-width-alt:3242;width:76pt'>
+ <col class=xl65 width=212 style='mso-width-source:userset;mso-width-alt:6784;
+ width:159pt'>
+ <col width=87 span=2 style='width:65pt'>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 width=83 style='height:16.0pt;width:62pt'>MACCHIN<span
+  style='display:none'>A</span></td>
+  <td width=47 style='width:35pt'>LINE<span style='display:none'>A</span></td>
+  <td width=441 style='width:331pt'>FAULT_Type</td>
+  <td width=101 style='width:76pt'>Fault_numb<span style='display:none'>er</span></td>
+  <td class=xl65 align=right width=212 style='width:159pt'><span
+  style='mso-spacerun:yes'>&nbsp;</span>Duration_hours<span
+  style='mso-spacerun:yes'>&nbsp;</span></td>
+  <td width=87 style='width:65pt'></td>
+  <td width=87 style='width:65pt'></td>
+ </tr>
+ 
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>SERVICE STOP BUTTON PRESSED</td>
+  <td align=right>1331</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>66 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>OUTER HELIX: BLANK ABSENCE</td>
+  <td align=right>627</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>27 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>CAMERA 3RD WHEEL: TOO MANY REJECTS EQ.</td>
+  <td align=right>1041</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>22 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>ALUFOIL UNWINDER MOTOR FAULT</td>
+  <td align=right>45</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>20 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>CAMERA 2ND FILTER: TOO MANY REJECTS EQ.</td>
+  <td align=right>661</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>20 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>ALUFOIL JAM</td>
+  <td align=right>634</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>19 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>LDS: EQUIPMENT NUMBER INCONSISTENT</td>
+  <td align=right>162</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>13 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>LDS CONTRAST OPEN</td>
+  <td align=right>221</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>11 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>SPIDER MOTOR FAULT</td>
+  <td align=right>294</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>11 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>CAMERA EXIT: TOO MANY REJECTS</td>
+  <td align=right>401</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>10 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>INNER HELIX: BLANK ABSENCE</td>
+  <td align=right>218</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>7 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>INNER HELIX: BLANK PRESENCE</td>
+  <td align=right>322</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>7 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+ <tr height=21 style='height:16.0pt'>
+  <td height=21 style='height:16.0pt'>H1000</td>
+  <td>LU30</td>
+  <td>TOO MANY BLANKS NOT PICKED-UP</td>
+  <td align=right>208</td>
+  <td class=xl65 align=right><span style='mso-spacerun:yes'>&nbsp;</span>6 </td>
+  <td class=xl66></td>
+  <td class=xl66></td>
+ </tr>
+
+</table>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- FINE CONTENUTO -->
+            </div>
+        </md-dialog-content>
+       
+    </form>
+</md-dialog>

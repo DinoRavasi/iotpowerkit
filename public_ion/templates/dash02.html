@@ -1,0 +1,105 @@
+<div class="row responsive-lg" id="machine" sstyle="padding: 0px" sstyle="height: 120px">
+    <div class="col">
+        <div class="card dashcard">
+            <div class="item item-divider">
+                Anomaly Trend
+            </div>
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto; height: 200px;">
+                <canvas height="70" id="line" class="chart chart-line" chart-data="linedata" chart-labels="linelabels" chart-legend="true"
+                    chart-series="lineseries" chart-options="{showTooltips: true}"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card dashcard">
+            <div class="item item-divider">
+                Anomaly Log
+            </div>
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto; height: 200px;">
+                <table border="1" width="100%">
+                    <tr ng-repeat="evl in anomalylog.slice().reverse() track by $index" ng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                        <td>
+                            {{evl.True_start}}
+                        </td>
+                        
+                        <td>
+                            {{evl.glossary}}
+                        </td>
+                       
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row responsive-lg card" id="gauges" style="height: 140px">
+    <div class="col" ng-repeat="a in gauges">
+       
+        <div class="gauge-value">{{a.data[0]}}</div>
+        <canvas height="120" id="gauge" class="chart chart-doughnut" chart-colors="colors" chart-data="a.data" chart-options="a.options"
+            chart-labels="a.labels">
+            </canvas>
+            <div class="gauge-label">{{a.labels[0]}}</div>
+    </div>
+</div>
+<div class="row responsive-lg card" id="availabilitytrend">
+    <div class="col">
+        <div class="card dashcard">
+            <div class="item item-divider">
+                Roll Force (Work Side and Drive Side)
+            </div>
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                <canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[0].data" chart-labels="sensormeasurement[0].labels" chart-legend="false"
+                    chart-series="sensormeasurement[0].series" chart-options="{showTooltips: true}"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card dashcard">
+            <div class="item item-divider">
+                Vibration Velocity (Main Motor)
+            </div>
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+               <canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[1].data" chart-labels="sensormeasurement[1].labels" chart-legend="true"
+                    chart-series="sensormeasurement[1].series" chart-options="{showTooltips: true}"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card dashcard">
+            <div class="item item-divider">
+                Current (Main Motor)
+            </div>
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+               <canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[2].data" chart-labels="sensormeasurement[2].labels" chart-legend="true"
+                    chart-series="sensormeasurement[2].series" chart-options="{showTooltips: true}"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div class="row responsive-lg">
+    <div class="col" id="meaasurementprofile">
+        <div class="sitem sitem-text-wrap" style="overflow: auto; height: 200px; text-align: center; vertical-align: middle">
+            <table border="1" width="100%">
+                <tr ng-repeat="evl in eventlog.slice().reverse() track by $index" ng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                    <td>
+                        {{evl}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col" id="eventlog">
+        <div class="sitem sitem-text-wrap" style="overflow:auto; height: 200px; text-align: center; vertical-align: middle">
+            <table border="1" width="100%">
+                <tr ng-repeat="evl in eventlog2.slice().reverse() track by $index" ng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                    <td>
+                        {{evl}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+-->

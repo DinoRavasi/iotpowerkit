@@ -1,0 +1,265 @@
+<style>
+    .title {
+        font-size: 20px;
+        font-family: "HelvLightIBM", "Helvetica Neue", Arial, sans-serif;
+        text-transform: uppercase;
+    }
+    
+    md-dialog.large-dialog {
+        max-width: 100%;
+        max-height: 100%;
+        width: 80%;
+        height: 70%;
+        border-radius: 0;
+    }
+     md-dialog.large-dialogFullScreen {
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+        height: 88%;
+        border-radius: 0;
+    }   
+    .backgroundimage {
+        height: auto;
+        left: 0;
+        margin: 0;
+        min-height: 100%;
+        min-width: 98px;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+    
+ 
+    .boxsubdashlist {
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.12);
+        background: rgba(227, 115, 129, 1.0);
+        color: #fff;
+        font-size: 20px;
+        font-family: "HelvLightIBM", "Helvetica Neue", Arial, sans-serif;
+        text-transform: uppercase;
+        padding: 0px 10px 0px 10px;
+        margin: 0px 15px
+    }
+
+    md-card {
+        margin: 2px;
+    }
+
+    md-card md-card-content {
+        padding: 3px;
+    }
+</style>
+<ion-view title="Dashboard" ng-init="init()" id="dash" style="background-color: #325c80;">
+<!--
+    <ion-nav-buttons side="left">
+        <button ng-click="toggleLeft()" class="button button-small button-clear icon-left ion-navicon">&nbsp;</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-class="simulstatus ? 'button-balanced' : 'button-dark'" ng-click="toggleCsvSimulation()" class="button button-small icon-left ion-ios-cloud-download">&nbsp;Toggle Simulation</button>
+        <button ng-click="toggleRight()" class="button button-small button-clear icon-left ion-navicon">&nbsp;</button>
+    </ion-nav-buttons>
+-->
+    <ion-content scroll="true" overflow-scroll="true">
+        <div flex layout="row" sng-controller="SwitchPeriodCtrl" style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background-color: #325c80; color: white">
+            <md-card style="width: 100px; height: 50px; margin: 2px;">
+                <md-card-header style="padding: 1px;">
+                    <a href="/" alt="Go back to map"><img id="backgroundimage" style="height: 48px; width: 98px;" src="img/customerlogo_GD.jpg" border="0" alt=""></a>
+                </md-card-header>
+            </md-card>
+            <md-card class="boxtimeframe">
+                <md-card-header style="padding: 15px 5px 10px 10px; height: 47px;">
+                    <md-card-avatar style="height:30px; width:25px; margin-left: -5px">
+                        <ng-md-icon icon="access_time" style="fill: white" size="25"></ng-md-icon>
+                    </md-card-avatar>
+                    <md-card-header-text style="width: 200px;">
+                        <p>Time Frame &nbsp;&nbsp;<span style="font-size: 10px;">[ {{datadiriferimento}} ]</span></p>
+                    </md-card-header-text>
+                </md-card-header>
+            </md-card>
+            <md-card class="boxtimeframe">
+                <md-card-content style="padding: 5px;">
+                    <div ng-cloak="" style="padding-left: 1px;padding-top: 5px;">
+                        <md-switch ng-model="intervall.period1" ng-disabled="intervall.period1" aria-label="Day" ng-change="onChange(intervall.period1,'day')"
+                            class="md-warn md-block" style="height: 20px; line-height: 18px; margin-bottom: 6px; margin-top: 6px;">
+                        Day</md-switch>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-card class="boxtimeframe">
+                <md-card-content style="padding: 5px;">
+                    <div ng-cloak="" style="padding-left: 1px;padding-top: 5px;">
+                        <md-switch ng-model="intervall.period2" ng-disabled="intervall.period2" aria-label="Month" ng-change="onChange(intervall.period2,'month')"
+                            class="md-warn md-block" style="height: 20px; line-height: 18px; margin-bottom: 6px; margin-top: 6px;">
+                        Month</md-switch>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-card class="boxtimeframe">
+                <md-card-content style="padding: 5px;">
+                    <div ng-cloak="" style="padding-left: 1px;padding-top: 5px;">
+                        <md-switch ng-model="intervall.period3" ng-disabled="intervall.period3" aria-label="Year" ng-change="onChange(intervall.period3,'year')"
+                            class="md-warn md-block" style="height: 20px; line-height: 18px; margin-bottom: 6px; margin-top: 6px;">
+                        Year </md-switch>
+                    </div>
+                </md-card-content>
+            </md-card>
+					<span flex></span>
+         <md-card class="boxtimeframe" ng-show="showmaximoactivation">
+                <md-card-content style="padding: 5px;">
+                    <div ng-cloak="" style="padding-left: 1px;padding-top: 5px;">
+                        <md-switch ng-model="linktoMaximo" aria-label="Maximo Activation" ng-change="MaximoActivation(linktoMaximo)"
+                            class="md-warn md-block" style="height: 20px; line-height: 18px; margin-bottom: 6px; margin-top: 6px;">
+                        Maximo Activation </md-switch>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+		
+        <!-- BOTTONI DEMETRIO  
+                <div class="button-bar timeframe-bar">
+                    <a grouped-radio="'Day'" ng-model="dashboard.timeframe">Day</a><br><br>
+                    <a grouped-radio="'Month'" ng-model="dashboard.timeframe">Month</a><br><br>
+                    <a grouped-radio="'Year'" ng-model="dashboard.timeframe">Year</a>
+                </div>
+	-->
+    <div layout="row" flex style="padding: 2px; background-color: #325c80;">
+            <div layout="row" layout-sm="column" class="upperdashrow" flex>
+			
+			
+
+                <div class="parent" layout="column" flex>
+                    <md-card >
+                         <div ng-click="getOperationShutdownTime()" class="cardhead boxheader">Operation Shutdown Time</div>
+                     
+                           <div  class="chartcontainer">
+                               <md-progress-linear ng-if="dashLoading.operationshutdown" md-mode="indeterminate"></md-progress-linear>
+                               
+                           <canvas  ng-if="!dashLoading.operationshutdown"  id="operationshutdownpie" class="chart chart-pie" chart-data="pie2.data" chart-labels="pie2.labels"
+                                chart-options="pie2.options">
+                                </canvas>
+						</div>
+                                
+                       <!-- </md-card-content>-->
+                    </md-card>
+                </div>
+                <div class="parent" layout="column" flex>
+                    <md-card>
+                        
+                        <div class="cardhead boxheader">Overall Equipment Health Score</div>
+
+                         
+                            <div class="chartcontainer">
+                                 <md-progress-linear ng-if="dashLoading.equipmenthealth" md-mode="indeterminate"></md-progress-linear>
+                                <canvas ng-if="!dashLoading.equipmenthealth" id="doughnut" class="chart chart-doughnut" chart-data="doughnot.data" chart-options="doughnot.options"
+                                chart-labels="doughnot.labels">
+                                </canvas>
+							</div>
+                    </md-card>
+                </div>
+                <div class="parent" layout="column" flex="15">
+                    <md-card>
+                         <div sng-click="getProductionOutputWithTarget()" class="cardhead boxheader">Prod.Output vs Target</div>
+                             
+                            <div  class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                <span class="textdash"><br>{{prodoutput}} / {{totoutput}}</span>
+                            </div>
+                    </md-card>
+                </div>
+                <div class="parent" layout="column" flex>
+                    <md-card>
+                        <div ng-click="getProductionDefectCount()" class="cardhead boxheader">Reject count</div>
+                            <div class="chartcontainer">
+                                <md-progress-linear ng-if="dashLoading.rejectcount" md-mode="indeterminate"></md-progress-linear>
+                                <canvas  ng-if="!dashLoading.rejectcount" id="bar" sheight="200px" class="chart chart-horizontal-bar" chart-data="defectbar.data" chart-labels="defectbar.labels"
+                                chart-options="defectbar.options" chart-series="defectbar.series">
+                                </canvas>
+						</div>
+                    </md-card>
+                </div>
+                <div class="parent" layout="column" flex>
+                    <md-card>
+                        <div ng-click="getEquipmentAnomalyCount()" class="cardhead boxheader">Equipment Stops</div>
+                            <div class="chartcontainer">
+                                <md-progress-linear ng-if="dashLoading.equipmentstops" md-mode="indeterminate"></md-progress-linear>
+                                <canvas ng-if="!dashLoading.equipmentstops" sheight="240" id="bar" class="chart chart-horizontal-bar" chart-data="equipmentanomaly.data" chart-labels="equipmentanomaly.labels"
+                                chart-series="equipmentanomaly.series" chart-options="equipmentanomaly.options">
+                                </canvas>
+						</div>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+
+	<div layout="row" flex style="padding: 2px; background-color: #325c80;">
+        <div flex="15" layout="row" style="background-color: #ffffff; padding-top: 5px; margin-right: 5px;">
+          
+            <div id="phases" flex class="item item-text-wrap" ng-repeat="phase in phases track by $index" style="text-align: center; vertical-align: middle; padding: 0px; margin: 0px;">
+                                <span class="phasename"></span>
+								<md-list layout="column" style="padding: 1px 0;">
+                                    <md-list-item class="md-2-line veggie-option" layout="row" layout-wrap>
+									<div style="background: #325c80; color: #ffffff; border-radius: 5px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);" flex >
+                                            <h3>{{phase.name}}</h3>
+   
+                            </div>
+								</md-list-item>
+								</md-list>	
+         						<md-progress-linear ng-if="CreationWOMaximo" md-mode="indeterminate"></md-progress-linear>
+                                <style>
+                                    .veggie-option {
+                                        float: left;
+                                        width: 100%;
+                                        box-sizing: border-box;
+                                        padding: 1px 1px;
+                                    }
+                                    
+                                    .veggie-option .md-item-text {
+                                        padding: 5px;
+                                        /*background: #f0f0f0;*/
+                                        border-radius: 3px;
+                                    }
+                                    
+                                    .veggie-option .md-item-text h3,
+                                    .veggie-option .md-item-text p {
+                                        padding: 0;
+                                        margin: 0;
+                                    }
+                                </style>
+                                <md-list layout="column">
+                                    <md-list-item class="md-2-line veggie-option" ng-repeat="machine in phase.machines track by $index" layout="row" layout-wrap>
+                                        <div sclass="md-item-text md-whiteframe-z1"  sng-style="machine.name.toLowerCase()==selectedMachine.name.toLowerCase() ? 'background: lightblue' : 'background: silver'" sstyle="background-color: {{machine.bkcolor}}" flex ng-click="selectMachine(machine)"
+                                            ng-class="machine.name.toLowerCase()==selectedMachine.name.toLowerCase() ? 'md-item-text md-whiteframe-z1 machineselected' : 'md-item-text md-whiteframe-z1 machineunselected'">
+                                            <h5>
+                                                <!--<ng-md-icon icon="build" size="14"></ng-md-icon>--> {{machine.name}}</h5>
+                                            <span style="font-size: 10px;">{{machine.description}}</span>
+                            </div>
+                            <span ng-if="$index==2" class="badge1" ng-click="showAddWOMaximo($event,machine.name)">1</span>
+                            </md-list-item>
+                            </md-list>
+        </div>
+
+		</div>
+        <div layout="column" flex>
+            <div style="height:50px; background-color: #ffffff;">
+                <section layout="row" layout-sm="column" layout-align="left center" layout-wrap id="buttons">
+                  <!--  <md-button class="md-raised">{{selectedMachine.name}}</md-button> -->
+                    <md-button ng-click="setDash(0)" ng-class="activedash==0 ? 'md-raised md-warn' : 'md-raised md-primary'">Equipment Monitoring</md-button>
+                    <md-button ng-click="setDash(1)" ng-class="activedash==1 ? 'md-raised md-warn' : 'md-raised md-primary'">Anomaly Detection</md-button>
+                    <md-button ng-click="setDash(2)" ng-class="activedash==2 ? 'md-raised md-warn' : 'md-raised md-primary'">Failure Prediction</md-button>
+                    <md-button ng-click="ShowMobileScreen($event,LastWOMaximoCreated,selectedMachine.name)" class="md-raised md-primary">Maintenance</md-button>
+                </section>
+            </div>
+            <div class="box3" style="height:90%; max-height:90%; flex:1 1 90%; background-color: #ffffff;">
+                <div ng-if="dashboard.activeriquadro==0" ng-include="'templates/dash01.html'"></div>
+                <div ng-if="dashboard.activeriquadro==1" ng-include="'templates/dash02.html'"></div>
+                <div ng-if="dashboard.activeriquadro==2" ng-include="'templates/dash03.html'"></div>
+                <div ng-if="dashboard.activeriquadro==3" ng-include="'templates/dash04.html'"></div>
+            </div>
+        </div>
+
+	</div>
+
+    </ion-content>
+</ion-view>

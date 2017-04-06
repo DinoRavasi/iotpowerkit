@@ -1,0 +1,9 @@
+applications:
+- name: ibm-industry4-dashboard
+  host: ibm-industry4-dashboard
+  command: node app.js
+  path: .
+  domain: eu-gb.mybluemix.net
+  instances: 1
+  memory: 512M
+  disk_quota: 512M

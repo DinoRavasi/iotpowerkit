@@ -1,0 +1,497 @@
+@font-face {
+    font-family: "HelvLightIBM";
+    font-style: normal;
+    src: url("//1.www.s81c.com/common/fonts/hni-v2-light.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni-v2-light.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni-v2-light.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni-v2-light.svg#HelvLightIBM") format("svg");
+}
+@font-face {
+    font-family: "HelvRegularIBM";
+    font-style: normal;
+    font-weight: normal;
+    src: url("//1.www.s81c.com/common/fonts/hni-v2-roman.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni-v2-roman.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni-v2-roman.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni-v2-roman.svg#HelvRegularIBM") format("svg");
+}
+@font-face {
+    font-family: "HelvBoldIBM";
+    font-style: normal;
+    font-weight: bold;
+    src: url("//1.www.s81c.com/common/fonts/hni-v2-bold.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni-v2-bold.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni-v2-bold.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni-v2-bold.svg#HelvBoldIBM") format("svg");
+}
+@font-face {
+    font-family: "icons-ibm-v4";
+    font-style: normal;
+    font-weight: normal;
+    src: url("//1.www.s81c.com/common/fonts/icons-ibm-v4.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/icons-ibm-v4.woff") format("woff"), url("//1.www.s81c.com/common/fonts/icons-ibm-v4.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/icons-ibm-v4.svg##icons-ibm-v4") format("svg");
+}
+@media not all {
+@font-face {
+    font-family: "icons-ibm-v4";
+    src: url("//1.www.s81c.com/common/fonts/#icons-ibm-v4.svg##icons-ibm-v4") format("svg");
+}
+}
+@font-face {
+    font-family: "icons-ibm-v9";
+    font-style: normal;
+    font-weight: normal;
+    src: url("//1.www.s81c.com/common/fonts/icons-ibm-v9.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/icons-ibm-v9.woff") format("woff"), url("//1.www.s81c.com/common/fonts/icons-ibm-v9.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/icons-ibm-v9.svg#icons-ibm-v9") format("svg");
+}
+@media not all {
+@font-face {
+    font-family: "icons-ibm-v9";
+    src: url("//1.www.s81c.com/common/fonts/icons-ibm-v9.svg#icons-ibm-v9") format("svg");
+}
+}
+
+body {
+  /*cursor: url('http://ionicframework.com/img/finger.png'), auto;*/
+  padding: 0px;
+  margin: 0px;
+}
+
+.current{
+  background: #ddd !important;
+}
+
+ion-side-menu.menu-left.menu {
+  background-color: #333 !important;
+}
+ion-side-menu.menu-left.menu ion-header-bar {
+  background-color: #333 !important;
+}
+
+ion-side-menu.menu-left.menu .list .item{
+ background: #333 !important;
+ color:#fff !important;
+ border:#564545 !important;
+}
+
+/*.dashcard {
+  margin: 3px;
+  height: 270px;
+
+}*/
+
+@media screen and (min-width: 1024px) {
+.menu-content{
+left: 45px !important;
+width: calc(100% - 45px) !important;
+}
+.menu-left{
+  width:320px !important;
+}
+.dashcard {
+  margin: 3px;
+  height: 270px;
+
+}
+
+}
+
+@media screen and (max-width: 300px) {
+  .dashcard {
+  margin: 3px;
+  /*height: 100%;*/
+
+}
+}
+
+.bar.bar-dark{
+  background: #333 !important;
+}
+
+.card .item-divider{
+  background: #ddd;
+  //color: white;
+}
+
+/*
+@media (min-width: 1024px) {
+.menu-content{
+left: 190px !important;
+width: calc(100% - 45px) !important;
+}
+.menu-left{
+  width:320px !important;
+}
+}*/
+
+.textdash {
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+.textdashbig {
+  font-size: 34px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+#dash .col {
+  /*padding: 2px 2px;*/
+  padding: 0px;
+}
+
+
+
+.phasecard {
+  margin: 3px;
+}
+
+.dashcard .row {
+  height: 100%;
+}
+
+
+
+
+
+.dashcard .item-divider, .phasecard .item-divider {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 11px;
+}
+
+.dashcard .item-text-wrap {
+  height: 100%;
+}
+
+.machineblock {
+   height: 50px;
+   width: 100%;
+   background: silver;
+   margin: 5;
+   border-radius: 6px;
+      text-align: center;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0px;
+  margin: 0px;
+}
+
+.machineblock .active{
+
+   background: seagreen;
+
+
+}
+
+.machinedescr {
+  font-size: 10px;
+}
+
+.badge1 {
+   position:relative;
+}
+.badge1 {
+   /*content:attr(data-badge);*/
+   position:absolute;
+   /*top:-10px;*/
+   right: 10px;
+   font-size:1em;
+   background:red;
+   color:white;
+   width:18px;height:18px;
+   text-align:center;
+   line-height:18px;
+   border-radius:20%;
+   box-shadow:0 0 1px #333;
+}
+
+#buttons .md-button {
+  margin: 2px; 
+}
+
+.eventlog {
+  font-size: 14px; 
+  overflow: auto; 
+  border: 0px 0px 1px 0px solid black;
+}
+
+.odd {
+  background: silver;
+}
+
+.phasename {
+  font-size: 12px;
+       text-align: center;
+  vertical-align: middle;
+   font-weight: bold;
+
+}
+
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 60px;                  
+  height: 28px;                 
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+} 
+
+
+/* Styles go here */
+
+.card-header {
+  padding:2px;
+  border:1px solid gray;
+  display: inline-block; 
+}
+.cardhead {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  /*background: #eee;*/
+
+}
+
+.fancy-frame2 {
+-moz-border-bottom-colors: none;
+-moz-border-left-colors: none;
+-moz-border-right-colors: none;
+-moz-border-top-colors: none;
+border-color: #09C #F0F0F0;
+border-image: none;
+border-radius: 100px 0 100px 0;
+-webkit-border-radius: 100px 0 100px 0;
+-moz-border-radius: 100px 0 100px 0;
+border-style: solid;
+border-width: 5px;
+box-shadow: 0 0 4px 0 #666666;
+}
+
+.A-grade {
+  background-color:#53a93f;
+}
+.B-grade {
+  background-color:#427fed;
+}
+.C-grade {
+  background-color:#FF7E00;
+}
+.O-grade {
+  background-color: rgb(221,75,57);
+}
+
+.is-active {
+  color:#0088cc;
+}
+
+
+.machineselected {
+  border: 2px solid #325c80;
+  background-color: #4178be;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+    
+
+.machineunselected {
+  border: 0px;
+  background: silver;
+  /*color: black;*/
+  
+}
+
+.button_on {
+  background: green;
+  color: black;
+}
+
+.button_off {
+  background: gray;
+  color: white;
+}
+
+
+.timeframe-bar > .button{
+  border: 1px solid #cfcfcf;
+  
+}
+
+.timeframe-bar > .button:last-child {
+  //border-radius: 0px 20px 20px 0px !important;
+}
+.timeframe-bar > .button:first-child {
+    //border-radius: 20px 0px 0px 20px !important;
+}
+
+.inputvariablekeys tr td {
+  font-size: 12px; 
+}
+
+.theader {
+  background: lightblue;
+  font-weight: bold;
+  font-size: 12px;
+  height: 20px;
+}
+
+.activedash {
+  color: yellow;
+}
+
+.subheader {
+  top: 50px;
+  position: fixed;
+}
+
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1) rotate(360deg); }
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+.upperdashrow md-card{
+  height: 190px;
+  min-height: 190px;
+  /*position: relative;*/
+}
+
+.upperdashrow .chartcontainer{
+  height: 170px;
+  min-height: 170px;
+  position: relative;
+}
+
+.selectedefm {
+  background: lightseagreen;
+}
+.unselectedefm {
+  background: white;
+}
+
+
+.cont {
+  position: relative;
+  top: 20px;
+  width: 100%;
+}
+
+
+.boxheader {
+  font-size: 15px; 
+  font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; 
+  background-color: #4178be;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.dialogtable table, tablemaximo table {
+	border-spacing: 0.5rem;
+	border-collapse: collapse
+}
+						
+.dialogtable td,th {
+	border: 1px solid #999;
+	padding: 0.5rem;
+	text-align: left;
+}
+						
+.tablemaximo td,tablemaximo th {
+	font-size: 10px;
+	border: 1px solid #999;
+	padding: 0.5rem;
+	text-align: left;
+}
+						
+.dialogtable th,th {
+	background: #4178be;
+	color: #ffffff;
+}
+
+.boxtimeframe {
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.12);
+        /*background: #cf142b;*/
+        background: #325c80;
+        /*color: #fff;*/
+        color: white;
+        font-size: 20px;
+        /*font-size: 15px;*/
+        font-family: "HelvLightIBM", "Helvetica Neue", Arial, sans-serif;
+        text-transform: uppercase;
+        padding: 5px 1px 5px 1px;
+        margin: 5px -1px;
+        height: 50px;
+}
+
+a.md-button.md-default-theme.md-primary, a.md-button.md-primary, .md-button.md-default-theme.md-primary, .md-button.md-primary {
+    color: #325c80; /*rgb(63, 81, 181);*/
+}
+
+a.md-button.md-default-theme.md-primary.md-raised, a.md-button.md-primary.md-raised, a.md-button.md-default-theme.md-primary.md-fab, a.md-button.md-primary.md-fab, .md-button.md-default-theme.md-primary.md-raised, .md-button.md-primary.md-raised, .md-button.md-default-theme.md-primary.md-fab, .md-button.md-primary.md-fab {
+    background-color: #325c80; /*rgb(63, 81, 181);*/
+    color: rgba(255, 255, 255, 0.87);
+}
+
+a.md-button.md-default-theme.md-primary.md-raised:hover:not([disabled]), a.md-button.md-primary.md-raised:hover:not([disabled]), a.md-button.md-default-theme.md-primary.md-fab:hover:not([disabled]), a.md-button.md-primary.md-fab:hover:not([disabled]), .md-button.md-default-theme.md-primary.md-raised:hover:not([disabled]), .md-button.md-primary.md-raised:hover:not([disabled]), .md-button.md-default-theme.md-primary.md-fab:hover:not([disabled]), .md-button.md-primary.md-fab:hover:not([disabled]) {
+    background-color: #325c80; /*rgb(63, 81, 181);*/
+}
+a.md-button.md-default-theme.md-primary.md-raised.md-focused:not([disabled]), a.md-button.md-primary.md-raised.md-focused:not([disabled]), a.md-button.md-default-theme.md-primary.md-fab.md-focused:not([disabled]), a.md-button.md-primary.md-fab.md-focused:not([disabled]), .md-button.md-default-theme.md-primary.md-raised.md-focused:not([disabled]), .md-button.md-primary.md-raised.md-focused:not([disabled]), .md-button.md-default-theme.md-primary.md-fab.md-focused:not([disabled]), .md-button.md-primary.md-fab.md-focused:not([disabled]) {
+    background-color: #4178be; /*rgb(57, 73, 171);*/
+}
+a.md-button.md-default-theme.md-primary:not([disabled]) md-icon, a.md-button.md-primary:not([disabled]) md-icon, .md-button.md-default-theme.md-primary:not([disabled]) md-icon, .md-button.md-primary:not([disabled]) md-icon {
+    color: rgb(63, 81, 181);
+}
+
+a.md-button.md-default-theme.md-raised[disabled], a.md-button.md-raised[disabled], a.md-button.md-default-theme.md-fab[disabled], a.md-button.md-fab[disabled], .md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled] {
+    background-color: rgba(0,0,0,0.12);
+}
+
+.well {
+    background: none;
+    height: 310px;
+	margin-bottom: 10px;
+    min-height: 20px;
+    padding: 5px 5px 5px 15px;
+}
+
+.table-scroll tbody {
+    position: absolute;
+    overflow-y: scroll;
+    height: 240px;
+}
+
+.table-scroll tr {
+    width: 100%;
+    table-layout: fixed;
+    display: inline-table;
+}
+
+.table-scroll thead > tr > th {
+    border: none;
+}
+
+#galleryGD{
+	width:640px;
+	height:400px;
+	margin:0 auto;
+	border:5px solid #fff;
+	overflow:hidden;
+	
+	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#galleryGD ul{
+	list-style:none;
+}

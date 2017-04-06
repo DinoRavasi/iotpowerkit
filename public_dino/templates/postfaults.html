@@ -1,0 +1,43 @@
+<md-dialog aria-label="Post Stop Events" class="large-dialog">
+    <form ng-cloak>
+	
+				<md-toolbar>
+			<div class="md-toolbar-tools" style="background: #325c80;">
+				<h2 style="color: #ffffff">Association Model Analysis - Post Stop Events</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="closeDialog()">
+					<ng-md-icon icon="close" style="fill: white" xsize="30"></ng-md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+	
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!-- INIZIO -->
+                <div layout="row" id="machine">
+                    <div flex layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+			<div class="col-md-12 well">
+    <table class="table table-scroll table-bordered">
+                    <thead>	
+                     <tr style="">
+                                            <th style="width: 55%">Antecedent</th>
+                                            <th style="width: 25%">Consequent</th>
+                                            <th style="width: 10%">Support %</th>
+                                            <th style="width: 10%">Confidence %</th>
+                                            </tr>
+					</thead>
+					<tbody>				
+						<tr ng-repeat="f in postfaults">
+							<td style="width: 55%">{{f.Antecedent}}</td>
+							<td style="width: 25%">{{f.Consequent}}</td>
+							<td style="width: 10%">{{f.Support}}</td>
+							<td style="width: 10%">{{f.Confidence}}</td>
+						</tr>
+                                    </table>
+                                </div>
+                    </div>
+                </div>
+                <!-- FINE CONTENUTO -->
+            </div>
+    </form>
+</md-dialog>

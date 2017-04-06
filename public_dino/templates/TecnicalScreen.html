@@ -1,0 +1,459 @@
+<md-dialog aria-label="Technical Screen" class="large-dialogFullScreen">
+	<form ng-cloak>
+		<md-toolbar>
+			<div class="md-toolbar-tools" style="background: #325c80;">
+				<h2 style="color: #ffffff">MAINTENANCE PERFOMANCE</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<ng-md-icon icon="close" style="fill: white" xsize="30"></ng-md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<!-- INIZIO -->
+				
+				
+				<div layout="row" >
+
+					<div flex="60" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Machine Details
+    </div>
+
+						<section flex>
+								<div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto;">
+									<table class="dialogtable" style="">
+										<tbody style="border: 1px solid #999;">
+											<tr>
+												<th>Phase Name</th>
+												<th>Machine Name</th>
+												<th>Date</th>
+												<th>Hours</th>
+												<th>OEE</th>
+												<th>Technicians</th>
+											</tr>
+											<tr>
+												<td>LU 30</td>
+												<td>{{macchinaselezionata}}</td>
+												<td>13/03/2017</td>
+												<td>12630</td>
+												<td >N/A</td>
+												<td rowspan="3">A.KARAKUM<br>M.KARADAĞLI</td>
+											</tr>
+											<tr>
+												<th>Good Production</th>
+												<th>Rejected Production</th>
+												<th>Production Time</th>
+												<th>Net Efficiency</th>
+												<th>Gross Efficiency</th>
+											</tr>
+											<tr>
+												<td> 90% </td>
+												<td> 10% </td>
+												<td> 50% </td>
+												<td> 60% </td>
+												<td> 70% </td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</section>
+
+					</div>
+
+				
+					<div flex="40" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+						
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Activity Details for Work Order {{WODefined}}
+    </div>
+						<section flex="40">
+								<div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto; ">
+									<table ng-show="WONotDefined" class="dialogtable" id="tablemaximo" style="width:100%;">
+										<tr>
+											<th > Data Not Available / Any WO is defined</th>
+										</tr>
+									</table>						
+<table ng-show="!WONotDefined" class="dialogtable" id="tablemaximo" style="width:100%;">
+<tr>
+	<th>&nbsp;</th>
+	<th>Planned</th>
+	<th>Actual</th>
+	<th>Total Ratio</th>
+</tr>
+<tr>
+	<td>Time</td>
+	<td>16</td>
+	<td>0</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>Task</td>
+	<td>6</td>
+	<td>0</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td rowspan="2">&nbsp;</td>
+	<td>POSTPONED / AGREED</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>POSTPONED / NO SPARE</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>SP PN</td>
+	<td>10</td>
+	<td>0</td>
+	<td>0</td>
+</tr>
+</table>						
+
+								</div>
+						</section>
+					</div>
+
+
+				</div>
+				
+				
+<div layout="row">
+  <div flex="40" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+    
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Tasks for Work Order {{WODefined}}
+    </div>
+	<md-progress-linear ng-if="SearchWOPlanned" md-mode="indeterminate"></md-progress-linear>
+    <section flex="50">
+		<div class="item item-text-wrap" style="vertical-align: middle; overflow: auto; height: 300px;" ng-init="takeWOPlanned()">
+
+									<table ng-show="WONotDefined" class="dialogtable" id="tablemaximo" style="width:100%;">
+										<tr>
+											<th > Data Not Available / Any WO is defined</th>
+										</tr>
+									</table>
+									
+									<table ng-show="!WONotDefined" class="dialogtable" id="tablemaximo" style="width:100%;">
+										<tr>
+											<th ng-click="takeWOPlanned()">Task</th>
+											<th>Summary</th>
+											<th>Estimated Duration</th>
+										</tr>
+										<tbody>
+											<tr ng-repeat="wo in woPlanned" ng-click="ShowSpareParts($index)">
+												<td>{{wo.Attributes.TASKID.content}}</td>
+												<td>{{wo.Attributes.DESCRIPTION.content}}</td>
+												<td>{{wo.Attributes.ESTDUR.content}}</td>
+											</tr>
+										</tbody>
+									</table>
+	</div>
+	</section>
+  </div> 
+
+  <div flex="40" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Spare Parts  for Work Order {{WODefined}}
+    </div>
+    <section flex="50">
+            <div class="item item-text-wrap" style="vertical-align: middle; overflow: auto; height: 300px;">
+
+												<table ng-show="WONotDefined" class="dialogtable" id="tablemaximo" style="width:100%;">
+										<tr>
+											<th > Data Not Available / Any WO is defined</th>
+										</tr>
+									</table>
+			
+					<table ng-show="!WONotDefined" class="dialogtable" id="spareparts" width="100%">
+						
+										<tr >
+											<th>Part. No.</th>
+											<th>Description</th>
+											<th>Qty</th>
+										</tr>
+							<tbody style="border: 1px solid #999;">
+										<tr style="border: 1px solid #999;">
+											<td>0,MH4440</td>
+											<td class=xl72 >SECTOR</td>
+											<td class=xl73 >48</td>
+										</tr>
+										<tr style="border: 1px solid #999;">
+											<td>0,MK18470</td>
+											<td>KNIFE</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MV2556</td>
+											<td>VANE</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MX2757</td>
+											<td>ROLLER</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MX4348</td>
+											<td>SPACER</td>
+											<td>10</td>
+										</tr>
+										<tr >
+											<td>0,MX480</td>
+											<td>ROLLER</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MX6697</td>
+											<td>BRUSH</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MX6971</td>
+											<td>HONING WHEEL</td>
+											<td>2</td>
+										</tr>
+										<tr >
+											<td>0,MX6989</td>
+											<td>KNIFE</td>
+											<td>20</td>
+										</tr>
+										<tr >
+											<td>0,MX7922</td>
+											<td>KNIFE</td>
+											<td>20</td>
+										</tr>
+										<tr >
+											<td>0,MY1457</td>
+											<td>PIN</td>
+											<td>1980</td>
+										</tr>
+										<tr >
+											<td>0,MY1726</td>
+											<td>SHAFT</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MY1811</td>
+											<td>PIN</td>
+											<td>1160</td>
+										</tr>
+										<tr >
+											<td>0,MY1942</td>
+											<td>SPACER</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MY2085</td>
+											<td>METALLIC BLOCK</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MY2086</td>
+											<td>PLATE</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>0,MY523</td>
+											<td>SCRAPER</td>
+											<td>2</td>
+										</tr>
+										<tr >
+											<td>0,MY869</td>
+											<td>ROD</td>
+											<td>24</td>
+										</tr>
+										<tr >
+											<td>0,MY870</td>
+											<td>ROD</td>
+											<td>24</td>
+										</tr>
+										<tr >
+											<td>25,08106002</td>
+											<td>BALL BEARING</td>
+											<td>3</td>
+										</tr>
+										<tr >
+											<td>25,08111003</td>
+											<td>BALL BEARING</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>25,08135001</td>
+											<td>BALL BEARING</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>25,08135131</td>
+											<td>BALL BEARING</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>25,09201025</td>
+											<td>ROLLER CAGE</td>
+											<td>6</td>
+										</tr>
+										<tr >
+											<td>25,09205102</td>
+											<td>NEEDLE BEARING</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>25,09208037</td>
+											<td>METALLIC RING</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>25,13101869</td>
+											<td>SEAL</td>
+											<td>3</td>
+										</tr>
+										<tr >
+											<td>25,13104012</td>
+											<td>SEAL</td>
+											<td>6</td>
+										</tr>
+										<tr >
+											<td>25,13105009</td>
+											<td>SEAL</td>
+											<td>2</td>
+										</tr>
+										<tr >
+											<td>25,13107037</td>
+											<td>GASKET</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>25,13402148</td>
+											<td>CARTRIDGE</td>
+											<td>1</td>
+										</tr>
+										<tr >
+											<td>25,20502053</td>
+											<td>SCREW</td>
+											<td>192</td>
+										</tr>
+										<tr >
+											<td>29,MX1100858</td>
+											<td>SCRAPER</td>
+											<td>2</td>
+										</tr>
+										<tr >
+											<td>3,MX27</td>
+											<td>BAND</td>
+											<td>84</td>
+										</tr>
+										<tr >
+											<td>3,MX315</td>
+											<td>BAND</td>
+											<td>168</td>
+										</tr>
+										<tr >
+											<td>3,MX390</td>
+											<td>BAND</td>
+											<td>126</td>
+										</tr>
+										<tr >
+											<td>3,MX57</td>
+											<td>FINGER</td>
+											<td>2</td>
+										</tr>
+										<tr >
+											<td>3,MX60</td>
+											<td>FINGER</td>
+											<td>2</td>
+										</tr>
+										<tr >
+											<td>3,MY4</td>
+											<td>ROLLER</td>
+											<td>3</td>
+										</tr>
+										<tr >
+											<td>3,MY44</td>
+											<td>PULLEY</td>
+											<td>2</td>
+										</tr>
+										<tr >
+											<td>3,MY5</td>
+											<td>SCRAPER</td>
+											<td>2</td>
+										</tr>
+										<tr >
+											<td>See lubrication note</td>
+											<td>GROUP</td>
+											<td>3</td>
+										</tr>
+										</tbody>
+					</table>	
+			
+            </div>
+	</section>
+  </div> 
+
+  
+  <div flex="20" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+		<md-button class="md-raised md-primary" xng-click="takehistorylog()">
+			 <md-icon md-svg-src="img/svg/bubble.svg" class="s48" aria-label="Cart"></md-icon> Chat Colleague
+		</md-button>	 
+		<md-button class="md-raised md-primary" xng-click="takehistorylog()">
+			<md-icon md-svg-src="img/svg/video.svg" class="s48" aria-label="Cart"></md-icon> Video Call
+		</md-button>
+		<md-button class="md-raised md-primary" xng-click="takehistorylog()">
+			<md-icon md-svg-src="img/svg/camera2.svg" class="s48" aria-label="Cart"></md-icon> Picture / Video
+		</md-button>
+
+		<md-button class="md-raised md-primary" xng-click="takehistorylog()">
+			<md-icon md-svg-src="img/svg/search.svg" class="s48" aria-label="Cart"></md-icon> Code recognition
+		</md-button>	
+
+		<md-button class="md-raised md-primary" xng-click="takehistorylog()">
+			<md-icon md-svg-src="img/svg/watson-icon.svg" class="s48" aria-label="Cart"></md-icon> Ask  G.D
+		</md-button>		
+  </div>
+  
+  </div>
+
+
+<div layout="column" >
+
+					<div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+							<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      History Log (WO Closed) for {{macchinaselezionata}}
+    </div>
+							<md-progress-linear ng-if="SearchWOClosed" md-mode="indeterminate"></md-progress-linear>
+							<section flex>
+								<div class="item item-text-wrap" style="text-align: left; vertical-align: top; overflow: auto; height: 250px;" ng-init="takehistorylog()">
+									<table ng-show="!ShowMaximoLoad" class="dialogtable" id="tablemaximo" style="width:100%;">
+										<tr>
+											<th ng-click="takehistorylog()">WO</th>
+											<th>Description</th>
+											<th>Location</th>
+											<th>Asset</th>
+										</tr>
+										<tbody>
+											<tr ng-repeat="wo in woClosed">
+												<td>{{wo.WONUM}}</td>
+												<td>{{wo.DESCRIPTION}}</td>
+												<td>{{wo.LOCATION}}</td>
+												<td>{{wo.ASSETNUM}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</section>
+
+					</div>
+
+					</div>
+				<!-- FINE CONTENUTO -->
+			</div>
+		</md-dialog-content>
+	<!--	<md-dialog-actions layout="row">
+			<md-button ng-click="answer('Close')">
+				Close
+			</md-button>
+		</md-dialog-actions>
+	-->
+	</form>
+</md-dialog>

@@ -1,0 +1,120 @@
+<div sclass="row responsive-lg" id="machine" sstyle="padding: 0px">
+    <div sclass="col">
+        <div sclass="row responsive-lg" layout="row">
+            <div flex="20" layout="column">
+                <div class="item item-text-wrap" style="text-align: center; vertical-align: middle" ng-click="showStops($event)">
+                    <md-progress-linear ng-if="dashLoading.operationshutdownmachine" md-mode="indeterminate"></md-progress-linear>
+                    <canvas ng-if="!dashLoading.operationshutdownmachine" height="120" id="operationshutdownpie" class="chart chart-horizontal-bar" chart-data="pie2machine.data" chart-labels="pie2machine.labels" chart-options="pie2machine.options"/>
+					<span ng-if="!dashLoading.operationshutdownmachine" style="font-size: 10px" >[ Click on charts to see the details ]</span>
+                </div>
+            </div>
+
+            <md-card ng-if="$index>0" flex sclass="col" layout="column" ng-repeat="r in riga400 track by $index">
+                        <div class="cardhead boxheader">{{r.text}}</div>
+                            <div class="chartcontainer" style="text-align: center; vertical-align: middle">
+<br><span class="textdashbig">{{numberWithCommas(r.value)}}</span>
+						</div>			
+			
+            </md-card>
+
+        </div>
+    </div>
+</div>
+<div layout="row" ng-if="faultsShown" >
+     <div flex layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+                    <p ng-if="faultsLoading">Loading faults data for {{selectedMachine.name}}...</p>
+     <md-progress-linear ng-if="faultsLoading" md-mode="indeterminate"></md-progress-linear>
+         <md-card ng-if="!faultsLoading">
+             <md-card-header md-colors="::{backgroundColor: 'default-primary-700'}" style="background: #325c80; color: white;">
+          <md-card-header-text>
+            <span class="md-title">Faults for {{selectedMachine.name}}</span>
+
+          </md-card-header-text>
+        </md-card-header>
+ 
+
+<div class="col-md-12 well">
+    <table class="table table-scroll table-bordered">
+                    <thead>	
+                     <tr style="">
+                 <th style="width: 50%">&nbsp;Fault type</th>
+                 <th style="width: 10%">&nbsp;Fault count</th>
+                 <th style="width: 10%">&nbsp;Duration (h)</th>
+                 <th style="width: 30%">
+				 &nbsp;Associative Models
+				 <md-progress-linear ng-if="PrePostventLoading" md-mode="indeterminate"></md-progress-linear>
+				 </th>
+                    </tr>
+					</thead>
+					<tbody>
+                 <tr ng-repeat="f in faults" >
+                     <td style="width: 50%">{{f.Fault_Type}}</td>
+                     <td style="width: 10%">{{numberWithCommas(f.Fault_count)}}</td>
+                     <td style="width: 10%">{{f.Duration_hours}}</td>
+                     <td style="width: 30%"><button ng-click="getPreFaults(selectedLine.name,selectedMachine.name)" class="md-button md-primary md-raised" ng-disabled="(selectMachine.name!='H1000') && (f.Fault_Type!='SERVICE STOP BUTTON PRESSED')">Pre event</button>
+                     <button ng-click="getPostFaults(selectedLine.name,selectedMachine.name)" class="md-button md-primary md-raised" ng-disabled="(selectMachine.name!='H1000') && (f.Fault_Type!='SERVICE STOP BUTTON PRESSED')">Post event</button>
+                     </td> 
+                 </tr>
+				</tbody>
+             </table>
+             </div>
+     </div>  
+     </md-card> 
+    </div>
+
+<div layout="row" style="background: #ffffff;">
+    <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+        <div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+            Healthy Score Trend
+        </div>
+        <section flex="50">
+            <canvas height="90" id="line" class="chart chart-line" chart-data="linedata" chart-labels="blanklinelabels" chart-legend="true"
+                chart-series="lineseries" chart-options="{showTooltips: true, legend: {display: false}}"></canvas>
+        </section>
+<div class="col-md-12 well">
+    <table class="table table-scroll table-bordered">
+                    <thead>
+                        <tr style="">
+                          <th style="width: 33%">Good Production</th>  
+                          <th style="width: 33%">Machine Speed</th> 
+                          <th style="width: 33%">Reject Production</th> 
+                        </tr>
+                      </thead>	
+					<tbody>
+                <tr ng-show="evl.Macchina.toLowerCase()==selectedMachine.name.toLowerCase()" ng-repeat="evl in eventlog.slice().reverse() track by $index" >
+                    <td style="width: 33%">{{numberWithCommas(evl.Good)}}</td>
+                   <td style="width: 33%">{{numberWithCommas(evl.Speed)}}</td>
+                    <td style="width: 33%">{{numberWithCommas(evl.Rejected)}}</td>
+                </tr>
+				</tbody>
+            </table>
+		</div>
+    </div>
+    <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+        <div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+            Equipment Availability Trend
+        </div>
+        <section flex="50">
+            <canvas height="90" id="line2" class="chart chart-line" chart-data="line2.data" chart-labels="line2.labels" chart-legend="true"
+                chart-series="line2.series" chart-options="{showTooltips: true, legend: { display:false}}"></canvas>
+        </section>
+<div class="col-md-12 well">
+    <table class="table table-scroll table-bordered">
+                    <thead>
+                        <tr style="">
+                    <th style="width: 30%">Time</th>
+                    <th style="width: 15%">Machine</th>
+                    <th style="width: 55%">Event description</th>
+                    </tr>
+					<tbody>
+                <tr ng-show="evl.MACCHINA.toLowerCase()==selectedMachine.name.toLowerCase()" ng-repeat="evl in eventlog2.slice().reverse() track by $index">
+                    <td style="width: 30%">  {{evl.end}} </td>
+                    <td style="width: 15%"> {{evl.MACCHINA}} </td>
+                    <td style="width: 55%"> {{evl.glossary.substring(0,25)}} </td>
+                    </tr>
+					</tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<grafico datasource="iotMap[0]" ></grafico>

@@ -1,0 +1,110 @@
+<div layout="row" id="machine">
+           
+  <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+  
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Equipment Failure Model
+    </div>
+   
+    <section flex="50">
+   
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto; height: 200px;">
+                <table border="1" width="100%">
+                    <tr align="center" class="theader">
+                        <th>&nbsp;Time</th>
+                        <th>&nbsp;Machine</th>
+                        <th>&nbsp;Model</th>
+                        <th>&nbsp;Score</th>
+                     <!--   <th>Recall</th> -->
+                    </tr>    
+ 
+                    <tr  ng-click="clickEquipmentFailureModel($index)" ng-repeat="evl in equipmentfailuremodel track by $index" ng-class="activeEFM==$index ? 'selectedefm' : 'unselectedefm'" ng-show="evl.Macchina.toLowerCase()==selectedMachine.name.toLowerCase()">
+                        <td>
+                            {{evl.Execution_Date}}
+                        </td>
+                        <td>
+                            {{evl.Macchina}}
+                          </td>
+
+                        <td>
+                            {{evl.Model_Name}}
+                        </td>
+                        <td>
+                            {{evl.Precision}}
+                        </td>
+					<!--	
+                         <td>
+                            {{evl.Recall}}
+                        </td>
+                      --> 
+                    </tr>
+                </table>
+            </div>
+          
+	</section>
+    
+  </div> 
+
+  
+  <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Input Variables Keys
+    </div>
+    <section flex="50">
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto; height: 200px;">
+                <table border="1" width="100%" class="inputvariablekeys">
+                    <tr align="left" class="theader">
+                      
+                        <th>&nbsp;Model_Name</th>
+                        <th>&nbsp;Variable_Name</th>
+                        
+                        <th>&nbsp;LastValue</th>
+                        </tr>
+                    <tr ng-show="(evl.Macchina.toLowerCase()==selectedMachine.name.toLowerCase()) && (inputvariablefilter==evl.Model_ID)" ng-repeat="evl in inputvariablekeys.rows track by $index" sng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                       
+                        <td>
+                            {{evl.Model_Name}}
+                        </td>
+                         <td>
+                            {{evl.Variable_Name}}
+                        </td>
+                        
+                         <td>
+                            {{evl.Last_Value}}
+                        </td>
+                       
+                    </tr>
+                </table>
+            </div>
+	</section>
+
+  </div> 
+</div>
+
+
+<div layout="row" style="background: #ffffff;">
+  <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+    
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Failure Probability Trend
+    </div>
+    <section flex="50">
+<canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[2].data" chart-labels="sensormeasurement[2].labels" chart-legend="true"
+                    chart-series="sensormeasurement[2].series" chart-options="{showTooltips: true, legend: {display: false}}"></canvas>
+	</section>
+  </div> 
+  <div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+	<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      Failure Prediction Model
+    </div>
+    <section flex="50">
+            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle; overflow: auto; height: 200px;">
+
+			<img src="img/failurepredictionmodel.png" ng-click="showCustom($event)" alt="Current (Main Motor)" style="width: 100%; height: 100%;">
+			
+            </div>
+	</section>
+
+  </div> 
+</div>
+

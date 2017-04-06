@@ -1,0 +1,218 @@
+
+        <div class="row">
+            <div class="col col-10" id="phases">
+                <div class="row">
+                    <div class="col" style="border: 0px solid silver; border-radius: 5px;">
+                        <img src="img/customerlogo_GD.jpg" style="width: 100%; height: 100%;" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="item item-divider">
+                                Phases
+                            </div>
+                            <div class="item item-text-wrap" ng-repeat="phase in phases track by $index" style="text-align: center; vertical-align: middle">
+                                <span class="phasename">{{phase.name}}</span>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="smachineblock" ng-repeat="machine in phase.machines track by $index">
+                                            <div class="machineblock">
+                                                <span>{{machine}}</span><span class="badge1">0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" id="firstrow">
+                    <div class="col">
+                        <div class="card" ng-click="getOperationShutdownTime()">
+                            <div class="item item-divider">
+                                Operation Shutdown Time
+                            </div>
+                            <div class="item item-text-wrap">
+                                <!--<canvas id="operationshutdownpie" class="chart chart-pie" chart-data="pie2.data"  chart-legend="{{pie2.options.legend}}" chart-labels="pie2.labels" chart-options="pie2.options">
+                                </canvas>-->
+                                <nvd3 options="g01options" data="g01data"></nvd3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="item item-divider">
+                                Overall Equipment Health Score
+                            </div>
+                            <div class="item item-text-wrap">
+                                <!--<canvas id="line" class="chart chart-line" chart-data="line.data" chart-labels="line.labels" chart-legend="true" chart-series="line.series"
+                                          chart-options="{showTooltips: true, scaleShowLabels: false}"></canvas>-->
+                                <!--<canvas id="doughnut" class="chart chart-doughnut" chart-data="doughnot.data" chart-labels="doughnot.labels">
+                                </canvas>-->
+                                <nvd3 options="g02options" data="g02data"></nvd3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="item item-divider">
+                                Production Output with Target(Day)
+                            </div>
+                            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                <span class="textdash">{{prodoutput}}/{{totoutput}}(EA)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="item item-divider">
+                                Production defect count
+                            </div>
+                            <div class="item item-text-wrap">
+                                <nvd3 options="g03options" data="g03data"></nvd3>
+                                <!--<canvas id="bar" class="chart chart-bar" chart-data="defectbar.data" chart-labels="defectbar.labels" chart-series="defectbar.series">
+                                </canvas>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="item item-divider">
+                                Equipment Anomaly Count(Month)
+                            </div>
+                            <div class="item item-text-wrap">
+                                <nvd3 options="g04options" data="g04data"></nvd3>
+                                <!--<canvas id="bar" class="chart chart-bar" chart-data="defectbar.data" chart-labels="defectbar.labels" chart-series="defectbar.series">
+                                </canvas>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="machine" style="padding: 0px">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col col-25">
+                                <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                    <span class="textdash">400</span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                    <span class="textdash">400</span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                    <span class="textdash">400</span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                    <span class="textdash">400</span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                    <span class="textdash">400</span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                    <span class="textdash">400</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="availabilitytrend">
+                    <div class="col">
+                        <div class="card">
+                            <div class="item item-divider">
+                                Healthy Score Trend
+                            </div>
+                            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                <nvd3 options="g05options" data="g05data"></nvd3>
+                                <!--<canvas height="50" id="line" class="chart chart-line" chart-data="bubble.data" chart-labels="bubble.labels" chart-legend="true"
+                                chart-series="bubble.series" chart-options="{showTooltips: true}"></canvas>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="item item-divider">
+                                Equipment Availability Trend
+                            </div>
+                            <div class="item item-text-wrap" style="text-align: center; vertical-align: middle">
+                                <nvd3 options="g06options" data="g06data"></nvd3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" id="meaasurementprofile">
+                        <div class="sitem sitem-text-wrap" style="overflow: auto; height: 200px; text-align: center; vertical-align: middle">
+                            <table border="1" width="100%">
+                                <tr ng-repeat="evl in eventlog.slice().reverse() track by $index" ng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                                    <td>
+                                        <!--<div ng-repeat="evl in eventlog track by $index" class="eventlog" >-->
+                                        {{evl}}
+                                        <!--</div>-->
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col" id="eventlog">
+                        <div class="sitem sitem-text-wrap" style="overflow:auto; height: 200px; text-align: center; vertical-align: middle">
+                            <table border="1" width="100%">
+                                <tr ng-repeat="evl in eventlog.slice().reverse() track by $index" ng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                                    <td>
+                                        <!--<div ng-repeat="evl in eventlog track by $index" class="eventlog" >-->
+                                        {{evl}}
+                                        <!--</div>-->
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+                  <div class="col">
+                        <div class="card">
+                              <div class="item item-divider">
+                                    Line Chart
+                              </div>
+                              <div class="item item-text-wrap">
+                                    <canvas id="line" class="chart chart-line" chart-data="line2.data" chart-labels="line2.labels" chart-legend="true" chart-series="line2.series"
+                                          chart-options="{showTooltips: true}"></canvas>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="col">
+                        <div class="card">
+                              <div class="item item-divider">
+                                    Events
+                              </div>
+                              <div class="item item-text-wrap">
+                                    {{numevents}}
+                              </div>
+                        </div>
+                  </div>
+                  <div class="col">
+                        <div class="card">
+                              <div class="item item-divider">
+                                    Line Chart
+                              </div>
+                              <div class="item item-text-wrap">
+                                    <canvas id="bar" class="chart chart-bar" chart-data="bars.data" chart-labels="bars.labels" chart-series="bars.series">
+                                    </canvas>
+                              </div>
+                        </div>
+                  </div>
+            </div>-->
+  
