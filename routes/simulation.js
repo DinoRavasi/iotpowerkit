@@ -12,28 +12,6 @@ var WIoT = require("ibmiotf");
 var deviceClientConnected = false;
 
 
-var boxfiles={
-    anomalylog: "https://ibm.box.com/shared/static/hssd2rp19ub03rrps71c1zh23kpxfyu1.json",
-    conditionindicators: "https://ibm.box.com/shared/static/ivl2djnv5yqhbnj528wjrrnxhziauchj.json",
-    sensormeasurement: "https://ibm.box.com/shared/static/p13iiwphchgkouxmc6xeb2azt11gopj3.json",
-    sensor_x1: "https://ibm.box.com/shared/static/ym6k4jng8nlbkeaubmssnhlwvaue5n4q.json",
-    sensor_x2: "https://ibm.box.com/shared/static/dq9vewly61r7oqhrqd53133q7d757tii.json",
-    sensor_x3: "https://ibm.box.com/shared/static/pehv9nkgzwpvx03kn0d4hwbvu03uu32a.json",
-    equipmentanomalylog: "https://ibm.box.com/shared/static/ckbsutwujpk9vc09qyllvyvhw7d0d6qz.json",
-    equipmentfailuremodel: "https://ibm.box.com/shared/static/gy7j9ci5apj1wcps6530ii2wl6wpxubx.json",
-    measurement_profile: "https://ibm.box.com/shared/static/igio7p0yfy1hy2c5o8fwjp0zzi2yxcci.json",
-    measurement_profile_new: "https://ibm.box.com/shared/static/ng9y3dc7r4qptrcpv5xr9gkrxl6hncmd.json",
-    healthscore: "https://ibm.box.com/shared/static/s01a6a1yyfji3rax93aeslxvr0odfamf.json",
-    healthscoretrend: "https://ibm.box.com/shared/static/b0uvluvjwxpunbwrd06hu9nbashcbdep.json",
-    equipmentavailability: "https://ibm.box.com/shared/static/jo33sa5y17t4ynlz64wr4if7pll1zeba.json",
-    oee2: "https://ibm.box.com/shared/static/c3eoy1fzlxcg1jb8f3e9xzu4di30qnmq.json",
-    LU30_equipment_anomaly_count: "https://ibm.box.com/shared/static/wskc6micxfrvkmgjn9ngmwlcmsg7k0qx.json",
-    LU30_production_defect_count: "https://ibm.box.com/shared/static/xh8r7a115hh7ptbry3p53qloe7tx134b.json",
-    faults: "https://ibm.box.com/shared/static/at4sdt6rcnh6hqopqschfatjjoi91yx0.json",
-    prestops: "https://ibm.box.com/shared/static/jkwdqxx9w9im3cc8bg0uikrvlipymwl0.json",
-    poststops: "https://ibm.box.com/shared/static/adp6l3apkukd0mxfsp54ybegwx96nren.json",
-
-}
 
 
 
@@ -61,7 +39,8 @@ var simuls = [{
         status_on: true,
         filename: "productionoutputwithtarget.json",
         filesource: "https",
-        httpsurl: "/shared/static/uj676p6rs32j7q6eid70rgdslqd56q1u.json",
+        httpsurl: boxf.getBoxFile("productionoutputwithtarget"),
+        shttpsurl: "/shared/static/uj676p6rs32j7q6eid70rgdslqd56q1u.json",
         evtype: "productionoutputwithtarget.json",
         rowindex: -1,
         buffer: [],
@@ -76,7 +55,7 @@ var simuls = [{
         filename: "LU_measurement_profile",
         filesource: "https",
         httpsurl: boxf.getBoxFile("measurement_profile_new"),
-        shttpsurl: "/shared/static/ng9y3dc7r4qptrcpv5xr9gkrxl6hncmd.json",
+        //httpsurl: "/shared/static/ng9y3dc7r4qptrcpv5xr9gkrxl6hncmd.json",
         evtype: "measurementprofile.json",
         rowindex: -1,
         buffer: [],
@@ -138,7 +117,7 @@ var simuls = [{
     {
         descr: "anomalylog",
         intervalTimer: null,
-        interval: 3000,
+        interval: 5000,
         status_on: true,
         filename: "anomalylog.json",
         filesource: "https",
@@ -148,7 +127,7 @@ var simuls = [{
         rowindex: -1,
         buffer: [],
         fields: "glossary,path,typology,True_start",
-        buffersize: 1000,
+        buffersize: 2,
 
 
 
@@ -466,6 +445,7 @@ function simulIntervalFunc(args) {
             buffersize: simultimer.buffersize
 
         }
+        console.log(simultimer.evtype);
         io.emit('iot_deviceevent', emitdata);
         //utils.colog("FROM BUFFER simid " + args + ", emitline " + simultimer.rowindex + ",urlfile " + fname, "bufsize", simultimer.buffer.length);
         simultimer.buffer.shift();
@@ -761,6 +741,7 @@ function simulIntervalFuncLocal(args) {
             buffersize: simultimer.buffersize
 
         }
+        console.log(simultimer.evtype);
         io.emit('iot_deviceevent', emitdata);
         //utils.colog("FROM BUFFER simid " + args + ", emitline " + simultimer.rowindex + ", file " + fname, "bufsize", simultimer.buffer.length);
         simultimer.buffer.shift();
@@ -773,13 +754,16 @@ function simulIntervalFuncLocal(args) {
 
 function simulIntervalFuncHttps(args) {
 
-    //console.log("SimulIntervalFuncHttps", args);
+    
     var simultimer = simuls[args];
+   
     var fname = simultimer.filename;
     var warnings = [];
     //console.log("simultimer buffer length",simultimer.buffer.length);
+     //console.log("SimulIntervalFuncHttps", args, simultimer.evtype,simultimer.buffer.length,simultimer.requestinprogress);
     if (simultimer.buffer.length == 0) {
         if (simultimer.requestinprogress == true) return;
+        
 
 
 
@@ -853,14 +837,7 @@ function simulIntervalFuncHttps(args) {
 
     } else {
         var io = global.io;
-        /*
-                io.emit('dashdata', {
-                    operation: "filesimulation",
-                    filename: fname,
-                    simulation_index: args,
-                    line: simultimer.rowindex,
-                    data: simultimer.buffer[0]
-                });*/
+
         var field = simultimer.fields;
         var events = [simultimer.buffer[0]];
         var emitdata = {
@@ -873,6 +850,7 @@ function simulIntervalFuncHttps(args) {
             buffersize: simultimer.buffersize
 
         }
+        //if (simultimer.evtype.indexOf("anomaly")>-1) console.log(simultimer.evtype);
         io.emit('iot_deviceevent', emitdata);
         //utils.colog("FROM BUFFER simid " + args + ", emitline " + simultimer.rowindex + ", file " + fname, "bufsize", simultimer.buffer.length);
         simultimer.buffer.shift();

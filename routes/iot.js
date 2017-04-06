@@ -170,7 +170,7 @@ appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, p
 
     if (!iot.active) return;
 
-     console.log("deviceEvent ! - devtypeid: " + deviceType + ":" + deviceId + ", eventType " + eventType);
+     //console.log("deviceEvent ! - devtypeid: " + deviceType + ":" + deviceId + ", eventType " + eventType);
   
 
 
@@ -198,7 +198,7 @@ appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, p
         //var idx=getIotIndex(eventType);
         //console.log("iotindex",idx);
         if (doIt) {
-            console.log("deviceEvent ! - devtypeid: " + deviceType + ":" + deviceId + ", eventType " + eventType);
+            //console.log("deviceEvent ! - devtypeid: " + deviceType + ":" + deviceId + ", eventType " + eventType);
             if (idx == -1) return;
             var iotevent = iotevents[idx];
 
@@ -269,7 +269,7 @@ appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, p
                 iotevent.buffer.push(iotout);
                 //eventbuffer.push(totcount);
                 if (iotevent.buffer.length == iotevent.buffersize) {
-                    utils.conslog("buffercount=" + iotevent.buffersize + ", emitting socket iot-deviceevent for evtype " + iotevent.evtype);
+                    //utils.conslog("buffercount=" + iotevent.buffersize + ", emitting socket iot-deviceevent for evtype " + iotevent.evtype);
 
                     var emitdata = {
                         events: iotevent.buffer,

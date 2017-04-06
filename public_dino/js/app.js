@@ -3702,6 +3702,7 @@ function tileArr(arr,size){
       }
 
       if (evtype == "anomalylog.json") {
+        console.log("anomalylog",args);
         if ($scope.anomalylog.length == 30) $scope.anomalylog.shift();
         $scope.anomalylog.push(args.events[0]);
         //console.log($scope.anomalylog.length);
