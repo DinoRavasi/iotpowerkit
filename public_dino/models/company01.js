@@ -1,7 +1,7 @@
 
 var machines= [
   {
-    name: "MACHINE01",
+    name: "Machine01",
     description: "Machine01",
     type: "",
 	bkcolor: "#e0e0e0"
@@ -70,7 +70,6 @@ var companydescr = [{
     
 var productionlines = [{
         name: "PL01",
-      
         machines: machines
       }
     ];

@@ -1832,7 +1832,7 @@ function tileArr(arr,size){
     $scope.datadiriferimento = globals.timeframedate.substring(6)
 
     $scope.selectedLine = {
-      name: "LU30"
+      name: "PL01"
     };
     $scope.LastWOMaximoCreated = ""
     $scope.CreationWOMaximo = false
@@ -2628,8 +2628,8 @@ function tileArr(arr,size){
 
 
     $scope.selectedMachine = {
-      name: "121P",
-      description: "Maker",
+      name: "Machine01",
+      description: "Machine01",
       type: ""
     }
 
@@ -3213,6 +3213,7 @@ function tileArr(arr,size){
 
 
         var total = parseFloat(data.production) + parseFloat(data.stop) + parseFloat(data.wait);
+        console.log("total",total);
         var prodperc = parseFloat(data.production / total * 100);
         var stopperc = parseFloat(data.stop / total * 100);
 
