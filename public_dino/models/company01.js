@@ -1,57 +1,57 @@
 
 var machines= [
   {
-    name: "121P",
-    description: "Maker",
+    name: "MACHINE01",
+    description: "Machine01",
     type: "",
 	bkcolor: "#e0e0e0"
   },
   {
-    name: "BUFFER-121B",
-    description: "Buffer",
+    name: "Machine02",
+    description: "Machine02",
     type: "buffer",
 	bkcolor: "#ffc107"
 	
   },
   {
-    name: "H1000",
-    description: "Packer",
+    name: "Machine03",
+    description: "Machine03",
     type: "",
 	bkcolor: "#e0e0e0"
   },
   {
-    name: "CH",
-    description: "Cellophane pacchetto",
+    name: "Machine04",
+    description: "Machine04",
     type: "",
 	bkcolor: "#e0e0e0"
   },
   {
-    name: "BV",
-    description: "Steccatrice-cartonatrice",
+    name: "Machine05",
+    description: "Machine05",
     type: "",
 	bkcolor: "#e0e0e0"
   },
   {
-    name: "BUFFER-BV",
-    description: "Buffer",
+    name: "Machine06",
+    description: "Machine06",
     type: "buffer",
 	bkcolor: "#ffc107"
   },
   {
-    name: "I",
-    description: "Inscatolatrice",
+    name: "Machine07",
+    description: "Machine07",
     type: "",
 	bkcolor: "#e0e0e0"
   },
   {
-    name: "BUFFER-I",
-    description: "Buffer",
+    name: "Machine08",
+    description: "Machine08",
     type: "buffer",
 	bkcolor: "#ffc107"
   },
   {
-    name: "P",
-    description: "Pallettizzazione",
+    name: "Machine09",
+    description: "Machine09",
     type: "",
 	bkcolor: "#e0e0e0"
   },
@@ -60,8 +60,8 @@ var machines= [
 
 
 var companydescr = [{
-        name: "LU30",
-        smachines: ["121P", "H1000","W1000BV"],
+        name: "PL01",
+        
         machines: machines
       }
     ];
@@ -69,8 +69,8 @@ var companydescr = [{
 
     
 var productionlines = [{
-        name: "LU30",
-        smachines: ["121P", "H1000","W1000BV"],
+        name: "PL01",
+      
         machines: machines
       }
     ];
@@ -78,8 +78,8 @@ var productionlines = [{
 
 var plants=[
   {
-    customer: "YYY",
-    location: "Izmir",
-    lines: ['LU30','XXX']
+    customer: "Customer01",
+    location: "Location01",
+    lines: ['PL01','PL02']
   }
 ]
