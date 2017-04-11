@@ -2005,6 +2005,7 @@ function tileArr(arr,size){
           targetEvent: ev,
           locals: {
             dataToPass: selecmac,
+            linea: $scope.selectedLine.name,
             wotopass: wotopass
           },
           clickOutsideToClose: true,
@@ -2243,7 +2244,7 @@ function tileArr(arr,size){
 
 
 
-    function MobileScreenController($scope, $mdDialog, backend, $timeout, $http, dataToPass, wotopass) {
+    function MobileScreenController($scope, $mdDialog, backend, $timeout, $http, dataToPass, linea,wotopass) {
 
       $scope.ShowMaximoLoad = false
       $scope.SearchWOPlanned = false
@@ -2252,6 +2253,7 @@ function tileArr(arr,size){
       $scope.SearchWOClosed = false
 
       $scope.macchinaselezionata = dataToPass
+      $scope.linea=linea;
       $scope.WOSelected = wotopass
       $scope.UltimoWO = wotopass
 
@@ -3456,7 +3458,7 @@ function tileArr(arr,size){
 
       })
 
-      // console.log("getriga400",$scope.riga400);
+      console.log("getriga400",$scope.riga400);
 
     }
 
