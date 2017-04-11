@@ -72,7 +72,7 @@
                 chart-series="lineseries" chart-options="{showTooltips: true, legend: {display: false}}"></canvas>
         </section>
 <div class="col-md-12 well">
-    <table class="table table-scroll table-bordered">
+    <table id="goodproduction" class="table table-scroll table-bordered">
                     <thead>
                         <tr style="">
                           <th style="width: 33%">Good Production</th>  
@@ -81,9 +81,9 @@
                         </tr>
                       </thead>	
 					<tbody>
-                <tr ng-show="evl.Macchina.toLowerCase()==selectedMachine.name.toLowerCase()" ng-repeat="evl in eventlog.slice().reverse() track by $index" >
-                    <td style="width: 33%">{{numberWithCommas(evl.Good)}}</td>
-                   <td style="width: 33%">{{numberWithCommas(evl.Speed)}}</td>
+                <tr ng-show="evl.Machine.toLowerCase()==selectedMachine.name.toLowerCase()" ng-repeat="evl in eventlog.slice().reverse() track by $index" >
+                    <td style="width: 33%">{{numberWithCommas(evl.Good_Production)}}</td>
+                   <td style="width: 33%">{{numberWithCommas(evl.Machine_Speed)}}</td>
                     <td style="width: 33%">{{numberWithCommas(evl.Rejected)}}</td>
                 </tr>
 				</tbody>
@@ -107,10 +107,10 @@
                     <th style="width: 55%">Event description</th>
                     </tr>
 					<tbody>
-                <tr ng-show="evl.MACCHINA.toLowerCase()==selectedMachine.name.toLowerCase()" ng-repeat="evl in eventlog2.slice().reverse() track by $index">
-                    <td style="width: 30%">  {{evl.end}} </td>
-                    <td style="width: 15%"> {{evl.MACCHINA}} </td>
-                    <td style="width: 55%"> {{evl.glossary.substring(0,25)}} </td>
+                <tr ng-show="evl.Machine.toLowerCase()==selectedMachine.name.toLowerCase()" ng-repeat="evl in eventlog2.slice().reverse() track by $index">
+                    <td style="width: 30%">  {{evl.Timestamp}} </td>
+                    <td style="width: 15%"> {{evl.Machine}} </td>
+                    <td style="width: 55%"> {{evl.Glossary.substring(0,25)}} </td>
                     </tr>
 					</tbody>
             </table>

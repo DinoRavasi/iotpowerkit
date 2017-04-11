@@ -1,0 +1,17 @@
+Machine;Model_ID;Model_Name;Variable_Name;Predictor_Importance;Last_Value
+Machine_01;Machine_01_Fault_01;Engine break;Predictor_01;0,53;3,4
+Machine_01;Machine_01_Fault_01;Engine break;Predictor_02;0,12;2,9
+Machine_01;Machine_01_Fault_01;Engine break;Predictor_03;0,63;1,2
+Machine_01;Machine_01_Fault_01;Engine break;Predictor_04;0,22;4
+Machine_01;Machine_01_Fault_02;Jam;Predictor_05;0,44;10
+Machine_01;Machine_01_Fault_02;Jam;Predictor_06;0,72;3
+Machine_01;Machine_01_Fault_02;Jam;Predictor_07;0,11;8
+Machine_01;Machine_01_Fault_02;Jam;Predictor_08;0,32;7
+Machine_02;Machine_02_Fault_03;Rotor break;Predictor_09;0,44;1
+Machine_02;Machine_02_Fault_03;Rotor break;Predictor_10;0,14;0,9
+Machine_02;Machine_02_Fault_03;Rotor break;Predictor_11;0,35;0,7
+Machine_02;Machine_02_Fault_03;Rotor break;Predictor_12;0,22;0,9
+Machine_02;Machine_02_Fault_04;Heat pump;Predictor_13;0,32;4
+Machine_02;Machine_02_Fault_04;Heat pump;Predictor_14;0,27;8
+Machine_02;Machine_02_Fault_04;Heat pump;Predictor_15;0,55;20
+Machine_02;Machine_02_Fault_04;Heat pump;Predictor_16;0,28;4

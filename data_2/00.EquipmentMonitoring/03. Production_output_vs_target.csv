@@ -1,0 +1,4 @@
+Line;Production;Target;Timeframe
+X01_line;250;900;day
+X01_line;7500;27000;month
+X01_line;90000;324000;year

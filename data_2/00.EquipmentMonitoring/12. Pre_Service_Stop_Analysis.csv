@@ -1,0 +1,9 @@
+Line;Machine;Antecedent ;Consequent; Support % ; Confidence % 
+X01_line;Machine_02;A;B;17,33;79,45
+X01_line;Machine_02;A>B;C;10,89;49,32
+X01_line;Machine_02;A>B>C;E;86,14;41,1
+X01_line;Machine_02;D;E;78,22;34,25
+X01_line;Machine_01;A;A;79,45;17,33
+X01_line;Machine_01;A>B;D;49,32;10,89
+X01_line;Machine_01;A>E>C;B;41,1;86,14
+X01_line;Machine_01;D;E;34,25;78,22

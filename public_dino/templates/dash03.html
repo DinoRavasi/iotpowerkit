@@ -18,19 +18,19 @@
                      <!--   <th>Recall</th> -->
                     </tr>    
  
-                    <tr  ng-click="clickEquipmentFailureModel($index)" ng-repeat="evl in equipmentfailuremodel track by $index" ng-class="activeEFM==$index ? 'selectedefm' : 'unselectedefm'" ng-show="evl.Macchina.toLowerCase()==selectedMachine.name.toLowerCase()">
+                    <tr  ng-click="clickEquipmentFailureModel($index)" ng-repeat="evl in equipmentfailuremodel track by $index" ng-class="activeEFM==$index ? 'selectedefm' : 'unselectedefm'" ng-show="evl.Machine.toLowerCase()==selectedMachine.name.toLowerCase()">
                         <td>
                             {{evl.Execution_Date}}
                         </td>
                         <td>
-                            {{evl.Macchina}}
+                            {{evl.Machine}}
                           </td>
 
                         <td>
                             {{evl.Model_Name}}
                         </td>
                         <td>
-                            {{evl.Precision}}
+                            {{evl.Score}}
                         </td>
 					<!--	
                          <td>
@@ -60,7 +60,7 @@
                         
                         <th>&nbsp;LastValue</th>
                         </tr>
-                    <tr ng-show="(evl.Macchina.toLowerCase()==selectedMachine.name.toLowerCase()) && (inputvariablefilter==evl.Model_ID)" ng-repeat="evl in inputvariablekeys.rows track by $index" sng-class="$index % 2 == 0 ? 'event' : 'odd'">
+                    <tr ng-show="(evl.Machine.toLowerCase()==selectedMachine.name.toLowerCase()) && (inputvariablefilter==evl.Model_ID)" ng-repeat="evl in inputvariablekeys.rows track by $index" sng-class="$index % 2 == 0 ? 'event' : 'odd'">
                        
                         <td>
                             {{evl.Model_Name}}

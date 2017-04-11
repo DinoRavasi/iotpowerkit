@@ -1,0 +1,13 @@
+Equipment_Name;Failure_Probability
+Machine_01_Fault_01;23%
+Machine_01_Fault_02;32%
+Machine_01_Fault_03;70%
+Machine_01_Fault_04;22%
+Machine_01_Fault_05;5%
+Machine_02_Fault_01;15%
+Machine_02_Fault_02;66%
+Machine_02_Fault_03;78%
+Machine_02_Fault_04;21%
+Machine_02_Fault_05;12%
+Machine_02_Fault_06;6%
+Machine_02_Fault_07;29%

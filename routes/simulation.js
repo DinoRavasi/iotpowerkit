@@ -59,7 +59,7 @@ var simuls = [{
         evtype: "measurementprofile.json",
         rowindex: -1,
         buffer: [],
-        fields: "Macchina,timestamp,Good,Speed,Rejected",
+        fields: "Machine,Timestamp,Good_Production,Machine_Speed,Rejected",
         buffersize: 1000,
 
 
@@ -213,7 +213,7 @@ var simuls = [{
         evtype: "equipmentanomalylog.json",
         rowindex: -1,
         buffer: [],
-        fields: "MACCHINA,end,glossary",
+        fields: "Machine,Timestamp,Glossary",
         buffersize: 1000,
 
 
@@ -231,7 +231,7 @@ var simuls = [{
         evtype: "equipmentfailurmodel.json",
         rowindex: -1,
         buffer: [],
-        fields: "Macchina,Model_ID,Model_Name,Precision,Recall,Execution_Date",
+        fields: "Machine,Model_ID,Model_Name,Score,Execution_Date",
         buffersize: 1000,
 
 

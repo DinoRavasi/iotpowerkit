@@ -1,10 +1,10 @@
 var debug = false;
 
-//var rooturl = "http://localhost:3000";
+var rooturl = "http://localhost:3000";
 //var rooturl = "http://iotindustry40.mybluemix.net";
 //var rooturl = "http://gd-demo-dashboard.mybluemix.net";
 //var rooturl = "http://9.71.213.181:3000";
-var rooturl = "https://ibm-industry4-dashboard.eu-gb.mybluemix.net";
+//var rooturl = "https://ibm-industry4-dashboard.eu-gb.mybluemix.net";
 
 var linktoMaximo = false;
 var datatobeused = "23-09-2016"
@@ -1832,7 +1832,7 @@ function tileArr(arr,size){
     $scope.datadiriferimento = globals.timeframedate.substring(6)
 
     $scope.selectedLine = {
-      name: "PL01"
+      name: "X01_line"
     };
     $scope.LastWOMaximoCreated = ""
     $scope.CreationWOMaximo = false
@@ -2628,7 +2628,7 @@ function tileArr(arr,size){
 
 
     $scope.selectedMachine = {
-      name: "Machine01",
+      name: "Machine_01",
       description: "Machine01",
       type: ""
     }
