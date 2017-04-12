@@ -18,6 +18,8 @@ var iot = require('./routes/iot');
 var dash = require("./lib/dashlib");
 var utils = require("./lib/utils");
 var db2 = require("./lib/dashdb");
+var boxfiles = require("./lib/boxfiles");
+var fmodel = require("./lib/factorymodel");
 
 
 var app = express();
@@ -385,6 +387,29 @@ app.get("/readfile/:fname", function (req, res) {
 })
 
 
+app.get("/reloadboxfiles",function(req,res){
+	boxfiles.loadBoxFiles(function(data){
+			
+			res.send(data);
+
+	})
+
+
+})
+
+
+app.get("/companyconfig",function(req,res){
+
+	fmodel.loadCompanyConfig(function(data){
+		res.send(data);
+
+	});
+	
+
+
+})
+
+
 app.get("/db2",function(req,res){
 
 	db2.open(function(data){
@@ -459,6 +484,9 @@ String.prototype.replaceAll = function (find, replace) {
     var str = this;
     return str.replace(new RegExp(find, 'g'), replace);
 };
+
+
+
 
 
 module.exports = app;

@@ -68,8 +68,9 @@
             Healthy Score Trend
         </div>
         <section flex="50">
-            <canvas height="90" id="line" class="chart chart-line" chart-data="linedata" chart-labels="blanklinelabels" chart-legend="true"
-                chart-series="lineseries" chart-options="{showTooltips: true, legend: {display: false}}"></canvas>
+               <iotchart datasource="charts[4]"></iotchart>
+             <!--<canvas height="90" id="line" class="chart chart-line" chart-data="linedata" chart-labels="blanklinelabels" chart-legend="true"
+                chart-series="lineseries" chart-options="{showTooltips: true, legend: {display: false}}"></canvas>-->
         </section>
 <div class="col-md-12 well">
     <table id="goodproduction" class="table table-scroll table-bordered">
@@ -95,8 +96,9 @@
             Equipment Availability Trend
         </div>
         <section flex="50">
-            <canvas height="90" id="line2" class="chart chart-line" chart-data="line2.data" chart-labels="line2.labels" chart-legend="true"
-                chart-series="line2.series" chart-options="{showTooltips: true, legend: { display:false}}"></canvas>
+            <iotchart datasource="charts[6]"></iotchart>
+            <!--<canvas height="90" id="line2" class="chart chart-line" chart-data="line2.data" chart-labels="line2.labels" chart-legend="true"
+                chart-series="line2.series" chart-options="{showTooltips: true, legend: { display:false}}"></canvas>-->
         </section>
 <div class="col-md-12 well">
     <table class="table table-scroll table-bordered">
@@ -117,4 +119,6 @@
         </div>
     </div>
 </div>
-<grafico datasource="iotMap[0]" ></grafico>
+
+
+

@@ -371,13 +371,14 @@ angular.module('iotapp', [
       restrict: "E",
 
       stemplate: '<div class="card" style="margin: 1px; "><div class="item item-divider"><span>{{datasource.evtype}}</span><div style="display:none;"><select ng-change="changeChartType()" ng-model="chartType"><option>line</option><option>bar</option><option>horizontal-bar</option><option>pie</option></select></div></div> <div class="item item-text-wrap" style="text-align: center; vertical-align: middle"><canvas style="{{canvasstyle}}" sheight="canvasheight" id="line"  class="" chart-data="datasource.chart.data" chart-labels="datasource.chart.labels" chart-legend="true" chart-series="datasource.chart.series" chart-options="datasource.chart.options"></canvas></div></div>',
-      template: '<div sstyle="height: {{canvasheight}}" ><canvas sstyle="{{canvasstyle}}" sheight="canvasheight" id="line"  class="" chart-data="datasource.chart.data" chart-labels="datasource.chart.labels" chart-legend="true" chart-series="datasource.chart.series" chart-options="datasource.chart.options"></canvas></div>',
+      template: '<div sstyle="height: {{canvasheight}}" ><canvas sstyle="{{canvasstyle}}" sheight="canvasheight" id="{{chartid}}"  class="" chart-data="datasource.chart.data" chart-labels="datasource.chart.labels" chart-legend="true" chart-series="datasource.chart.series" chart-options="datasource.chart.options"></canvas><div ng-if="debug" style="background: lightblue; color: black; text-align: center">{{chartid}}</div></div>',
 
       scope: {
         datasource: "=",
         eventtype: "@evtype",
         fields: "=",
-        charttype: "@charttype"
+        charttype: "@charttype",
+        debug: "=debug"
       },
       /*
             link: function (scope, element, attributes) {
@@ -397,11 +398,12 @@ angular.module('iotapp', [
         return {
           pre: function (scope, element, attributes, controller, transcludeFn) {
 
-            //console.log("COMPILEPRE", scope.classe, scope.canvasheight);
+            console.log("COMPILEPRE", scope.classe, scope.canvasheight);
 
             var cl = "chart chart-" + scope.classe;
             element.find("canvas").attr("class", cl);
             element.find("canvas").attr("height", scope.canvasheight);
+
             //element.find("canvas").prepend("<h1>esticazzi</h1>");
 
 
@@ -410,7 +412,7 @@ angular.module('iotapp', [
 
           },
           post: function (scope, element, attributes, controller, transcludeFn) {
-            //console.log("COMPILEPOST", element.html());
+            console.log("COMPILEPOST", element.html());
 
             var contents = element.contents();
 
@@ -424,11 +426,37 @@ angular.module('iotapp', [
       },
       controller: function ($scope, $element, $compile) {
         console.log("CONTROLLER", $scope.datasource);
+        console.log("DEBUG", $scope.debug);
+        if (!$scope.datasource) {
+          $scope.datasource = {
+            "evtype": "event",
+            "id": "pozzevent",
+            "sfields": [
+              "umid",
+              "temp"
+            ],
+            chart: {
+              data: [
+                [1, 2, 3, 4, 5, 6, 7, 8]
+              ],
+              labels: [1, 2, 3, 4, 5, 6, 7, 8],
+              series: ["staminkia"]
+            }
+          }
+          //return;
+        }
 
         console.log("chart eventtype", $scope.eventtype);
         var evtype = "";
+        var debug=false;
         if ($scope.eventtype) evtype = $scope.eventtype;
+        if ($scope.debug) {
+          console.log("there is a debug param")
+          if (String($scope.debug)=="true") debug=true;
+        
+        }
 
+        console.log("CHARTDEBUG",debug);
         if (!$scope.datasource.evtype) $scope.datasource.evtype = evtype;
 
 
@@ -442,7 +470,17 @@ angular.module('iotapp', [
         $scope.classe = $scope.datasource.chart.type;
         $scope.hasCard = $scope.datasource.chart.hasCard;
         $scope.chartType = $scope.classe;
+        $scope.etype = $scope.datasource.evtype;
         $scope.canvasheight = "150";
+        var ts = new Date().getTime();
+        $scope.chartid = $scope.etype + "_" + ts;
+
+        $scope.debugbar="";
+        if (debug){
+         
+          $scope.debugbar='<br><div style="background: lightblue; color: black; text-align: center">'+$scope.chartid+'</div>';
+            $compile($element.contents())($scope);
+        }
 
         $scope.getTemplate = function () {
           return "<b>prova</b>"
@@ -459,6 +497,10 @@ angular.module('iotapp', [
 
         }
 
+        $scope.getTimestamp = function () {
+          return new Date().getTime();
+        }
+
 
 
 
@@ -470,11 +512,113 @@ angular.module('iotapp', [
 
 
 
-  .factory("iotchart", function () {
+  .factory("iotchart", function ($timeout, globals, backend) {
     var iotchart = {};
+
+    var charts = [{
+        "evtype": "event",
+        "id": "pozzevent",
+        "sfields": [
+          "umid",
+          "temp"
+        ]
+      },
+      {
+        "evtype": "temp",
+        "id": "cialdevent",
+        "sfields": [
+          "umid",
+          "temp"
+        ]
+      },
+      {
+        "evtype": "temp2",
+        "id": "cialdevent2",
+        "sfields": [
+          "umid",
+          "temp"
+        ]
+      },
+      {
+        "evtype": "equipmentanomalylog.json",
+        "id": "equipmentanomalylog",
+        "sfields": [
+          "umid",
+          "temp"
+        ]
+      },
+      {
+        "evtype": "TimeHistory_H1000_LU30.json",
+        "id": "healthyscoretrend",
+        "sfields": [
+          "umid",
+          "temp"
+        ]
+      },
+      {
+        "evtype": "sensormeasurement.json",
+        "id": "sensormeasurement",
+        "sfields": [
+          "umid",
+          "temp"
+        ]
+      },
+      {
+        "evtype": "MAKER_Scarti_sigarette.json",
+        "id": "MAKER_Scarti_sigarette",
+        "sfields": [
+          "umid",
+          "temp"
+        ]
+      }
+
+
+      
+    ]
 
 
     iotchart.charts = charts;
+    //iotchart.charts = [];
+
+    iotchart.getIotCharts = function (callback) {
+
+      backend.get(globals.rooturl + "/iot/iotmap", function (data) {
+        $timeout(function () {
+          iotchart.charts = data;
+          if (callback) callback(data);
+
+
+        })
+
+      })
+    }
+
+    //iotchart.getIotCharts();
+
+
+    /*
+        iotchart.getIotCharts(function (data) {
+          $timeout(function () {
+            iotchart.charts = data;
+            console.log("iotcharts mapped", data);
+
+          })
+
+        })
+        */
+
+    iotchart.getChartById = function (id) {
+      var retvalue = {};
+      iotchart.charts.forEach(function (item, idx) {
+        if (item.id.toLowerCase().trim() == id.trim().toLowerCase()) {
+          retvalue = item;
+        }
+
+      })
+      return retvalue;
+    }
+
+
 
     iotchart.getRandomData = function (n) {
       var arr = [];
@@ -487,7 +631,7 @@ angular.module('iotapp', [
 
     iotchart.mapIot = function (args, $scope) {
       var charts = iotchart.charts;
-      //console.log("mapIot service event", args);
+      console.log("mapIot service event", args);
       //check if there is a defined evtype equal to the buffered ones
       var foundiot = false;
       var iotindex = -1;
@@ -504,6 +648,7 @@ angular.module('iotapp', [
         return;
       }
       var chart = iotchart.charts[iotindex];
+      console.log("working on chart", chart);
 
       if (!chart.chart) {
         chart.chart = {
@@ -568,9 +713,9 @@ angular.module('iotapp', [
         chart.steps = 2 * treatAsArrayLength;
 
         for (var i = 0; i < chart.steps; i++) {
-          var txt=parseInt(i, 10) + 1;
-          if (chart.steps>30) txt=".";
-          if ((i%10)==0) txt=parseInt(i, 10);
+          var txt = parseInt(i, 10) + 1;
+          if (chart.steps > 30) txt = ".";
+          if ((i % 10) == 0) txt = parseInt(i, 10);
           chart.chart.labels.push(txt);
         }
 
@@ -783,62 +928,63 @@ angular.module('iotapp', [
 
   })
 
-  .controller('GraficiCtrl', function ($scope, socket /*, $ionicSideMenuDelegate*/ , $compile, iotchart) {
+  .controller('GraficiCtrl', function ($timeout, $scope, socket /*, $ionicSideMenuDelegate*/ , $compile, iotchart) {
 
     function chunk(arr, size) {
-  var newArr = [];
-  for (var i=0; i<arr.length; i+=size) {
-    newArr.push(arr.slice(i, i+size));
-  }
-  console.log("newArr")
-  return newArr;
+      var newArr = [];
+      for (var i = 0; i < arr.length; i += size) {
+        newArr.push(arr.slice(i, i + size));
+      }
+      console.log("newArr")
+      return newArr;
 
-}
-
-function tileArr(arr,size){
-  var newrow={
-      cols: []
-    }
-  
-  var rows=[newrow];
-  var row=0;
-  var col=-1;
-  arr.forEach(function(item,idx){
-    rows[row].cols.push(item);
-    console.log("idx",idx);
-    
-    if (((idx+1)%size)==0){
-      console.log("splitting")
-      col=-1;
-      row++;  
-      rows.push(newrow);
-      
-      
-    }
-   
-    
-  })
-   console.log("rows",rows);
-   return rows;
-
-}
-
-
-
-    $scope.manzo = {
-
-      chart: {
-        title: "titolo",
-        type: "bar",
-        data: [3, 4, 5, 6, 7],
-        labels: [1, 2, 3, 4],
-        series: [],
-      },
-      evtype: "sensormeasurement.json",
-      fields: ["Value", "rinoceronte", "fagiano"],
-      steps: 7
     }
 
+    function tileArr(arr, size) {
+      var newrow = {
+        cols: []
+      }
+
+      var rows = [newrow];
+      var row = 0;
+      var col = -1;
+      arr.forEach(function (item, idx) {
+        rows[row].cols.push(item);
+        console.log("idx", idx);
+
+        if (((idx + 1) % size) == 0) {
+          console.log("splitting")
+          col = -1;
+          row++;
+          rows.push(newrow);
+
+
+        }
+
+
+      })
+      console.log("rows", rows);
+      return rows;
+
+    }
+
+
+    /*
+        $scope.manzo = {
+
+          chart: {
+            title: "titolo",
+            type: "bar",
+            data: [3, 4, 5, 6, 7],
+            labels: [1, 2, 3, 4],
+            series: [],
+          },
+          evtype: "sensormeasurement.json",
+          fields: ["Value", "rinoceronte", "fagiano"],
+          steps: 7
+        }
+
+    */
 
     $scope.$on("iotbuffer", function (event, args) {
 
@@ -848,7 +994,22 @@ function tileArr(arr,size){
 
     $scope.init = function () {
       $scope.charts = iotchart.charts;
-      $scope.chartrows = tileArr($scope.charts,2);//chunk($scope.charts, 3);
+      console.log("CHARTS", $scope.charts);
+      $scope.chartrows = tileArr($scope.charts, 2); //chunk($scope.charts, 3);
+
+      return;
+
+      iotchart.getIotCharts(function (data) {
+        $timeout(function () {
+          $scope.charts = data;
+          console.log("CHARTS", $scope.charts);
+          $scope.chartrows = tileArr($scope.charts, 2); //chunk($scope.charts, 3);
+
+        })
+
+
+      })
+
 
     }
 
@@ -1819,8 +1980,9 @@ function tileArr(arr,size){
 
   })
 
-  .controller("DashCtrl", function ($timeout, $scope, dbs, ChartService, globals, $http, backend /*, $ionicLoading*/ , $mdDialog, socket, secured) {
+  .controller("DashCtrl", function (iotchart, $timeout, $scope, dbs, ChartService, globals, $http, backend /*, $ionicLoading*/ , $mdDialog, socket, secured) {
 
+    $scope.charts = [];
     $scope.FullName = globals.nome + " " + globals.cognome;
     $scope.maximoactivation = globals.maximoactivation;
     if (String($scope.maximoactivation) == 'true') {
@@ -1905,6 +2067,7 @@ function tileArr(arr,size){
 
 
 
+
     $scope.activedash = 0;
 
     $scope.manzo = {
@@ -1931,7 +2094,7 @@ function tileArr(arr,size){
       console.log("machine", machine);
       var confirm = $mdDialog.confirm()
         .title('Warning on ' + machine)
-        .textContent('3° wheel pusher of machine ' + machine + ', line ' + productionlines[0].name + ', ' + plants[0].location + '  plant has reached a failure probability of 80% within 3 days. No maintenance activities planned. Do you want to create a new work order request ?')
+        .textContent('Engine 7 of machine ' + machine + ', line ' + $scope.phases[0].name + ', ' + $scope.companyconfig.plants[0].location + '  plant has reached a failure probability of 80% within 3 days. No maintenance activities planned. Do you want to create a new work order request ?')
         .ariaLabel('Lucky day')
         .targetEvent(ev)
         .ok('Yes')
@@ -1939,7 +2102,7 @@ function tileArr(arr,size){
 
       $mdDialog.show(confirm).then(function () {
         $scope.CreationWOMaximo = true
-        var NewWONumb = (Math.ceil(Math.random() * 9999)) + "_LU-PK"
+        var NewWONumb = (Math.ceil(Math.random() * 9999)) + "_MC-MX"
 
         var urlmaximo = "http://172.17.196.115/maxrest/rest/os/MXWO?_lid=maxadmin&_lpwd=maxadmin&siteid=BEDFORD&wonum=" + NewWONumb + "&assetnum=GD-PK-10047&jpnum=GD-H1000-MON&targstartdate=2017-03-23T18:30:00-01:00&status=WSCH"
 
@@ -1992,6 +2155,21 @@ function tileArr(arr,size){
         $scope.status = '....';
       });
     };
+
+
+    $scope.getChartById = function (id) {
+      var retvalue = {};
+      console.log("getchartsbyid " + id);
+      $scope.charts.forEach(function (item, idx) {
+        if (item.id) {
+          if (item.id.toLowerCase() == id.toLowerCase()) {
+            console.log("found chart !", item);
+            retvalue = item;
+          }
+        }
+      })
+      return retvalue;
+    }
 
 
 
@@ -2076,7 +2254,7 @@ function tileArr(arr,size){
       $scope.faultsShown = !$scope.faultsShown;
       if ($scope.faultsShown) {
         $scope.faultsLoading = true;
-        var url = globals.rooturl + "/dashboard/getfaults?line=" + productionlines[0].name + "&machine=" + $scope.selectedMachine.name;
+        var url = globals.rooturl + "/dashboard/getfaults?line=" + $scope.companyconfig.plants[0].productionlines[0].name + "&machine=" + $scope.selectedMachine.name;
         backend.get(url, function (data) {
           $timeout(function () {
             $scope.faultsLoading = false;
@@ -2244,7 +2422,7 @@ function tileArr(arr,size){
 
 
 
-    function MobileScreenController($scope, $mdDialog, backend, $timeout, $http, dataToPass, linea,wotopass) {
+    function MobileScreenController($scope, $mdDialog, backend, $timeout, $http, dataToPass, linea, wotopass) {
 
       $scope.ShowMaximoLoad = false
       $scope.SearchWOPlanned = false
@@ -2253,7 +2431,7 @@ function tileArr(arr,size){
       $scope.SearchWOClosed = false
 
       $scope.macchinaselezionata = dataToPass
-      $scope.linea=linea;
+      $scope.linea = linea;
       $scope.WOSelected = wotopass
       $scope.UltimoWO = wotopass
 
@@ -2385,7 +2563,7 @@ function tileArr(arr,size){
                   "content": 10
                 },
                 "DESCRIPTION": {
-                  "content": "NG0037.00 - Check of cigarette pusher"
+                  "content": "Initial Automated Inspection"
                 },
                 "ESTDUR": {
                   "content": 3
@@ -2398,7 +2576,7 @@ function tileArr(arr,size){
                   "content": 20
                 },
                 "DESCRIPTION": {
-                  "content": "NC0025.01 - Grease of first wheel equipments spherical joints"
+                  "content": "Cleaning"
                 },
                 "ESTDUR": {
                   "content": 6
@@ -2411,7 +2589,7 @@ function tileArr(arr,size){
                   "content": 30
                 },
                 "DESCRIPTION": {
-                  "content": "NC0059.00 - Replace of Dynamic buffer contrast roller"
+                  "content": "2nd Manual Inspection"
                 },
                 "ESTDUR": {
                   "content": 1
@@ -2424,7 +2602,7 @@ function tileArr(arr,size){
                   "content": 40
                 },
                 "DESCRIPTION": {
-                  "content": "NC0012.00 - Replace of 2nd wheel kit pullouts"
+                  "content": "Lubrication pump oil"
                 },
                 "ESTDUR": {
                   "content": 4
@@ -2437,7 +2615,20 @@ function tileArr(arr,size){
                   "content": 1000
                 },
                 "DESCRIPTION": {
-                  "content": "Run Up"
+                  "content": "Check pressure"
+                },
+                "ESTDUR": {
+                  "content": 1
+                }
+              }
+            },
+            {
+              "Attributes": {
+                "TASKID": {
+                  "content": 1100
+                },
+                "DESCRIPTION": {
+                  "content": "Final Inspection"
                 },
                 "ESTDUR": {
                   "content": 1
@@ -2629,11 +2820,11 @@ function tileArr(arr,size){
     ];
 
 
-    $scope.selectedMachine = {
+    /*$scope.selectedMachine = {
       name: "Machine_01",
       description: "Machine01",
       type: ""
-    }
+    }*/
 
     $scope.linecampo = "True_duration";
     $scope.line2campo = "acceleration_x";
@@ -2646,8 +2837,9 @@ function tileArr(arr,size){
     $scope.linelabels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     $scope.blanklinelabels = ['', '', '', '', '', '', '', '', '', ''];
 
-    $scope.phases = companydescr;
-    //console.log("phases", $scope.phases);
+    //$scope.phases = companyconfig.plants[0].productionlines[0].machines;
+    //$scope.phases=companydescr;
+    $scope.phases = [];
 
     $scope.prodoutput = 100;
     $scope.totoutput = "21.6M";
@@ -3053,6 +3245,18 @@ function tileArr(arr,size){
     $scope.buffercount = 0;
     $scope.buffer = [];
     $scope.simulstatus = false;
+    $scope.companyconfig = {};
+    $scope.chartona = {
+      "evtype": "temp2",
+      "id": "staminkia",
+      "sfields": [
+        "umid",
+        "temp"
+      ]
+    }
+
+    $scope.charts = iotchart.charts;
+
 
     $scope.init = function () {
       //iot.connect();
@@ -3062,11 +3266,34 @@ function tileArr(arr,size){
         $timeout(function () {
           $scope.simulstatus = data.simulstatus;
           console.log($scope.simulstatus);
+          console.log("phases before commpanyconfig load", $scope.phases);
+          backend.get(globals.rooturl + "/companyconfig", function (cdata) {
+            console.log("companyconfig loaded", cdata);
+            $timeout(function () {
+              $scope.phases = cdata.plants[0].productionlines;
+              $scope.companyconfig = cdata;
+              console.log("phases after commpanyconfig load", $scope.phases);
+              $scope.selectedMachine = $scope.phases[0].machines[0];
+              $scope.charts = iotchart.charts;
+
+              console.log("CHARTS IN DASHCTRL", $scope.charts);
+              $scope.getUpperDash();
+
+              /*
+              iotchart.getIotCharts(function (chdata) {
+                
+
+              })*/
+
+            })
+
+
+          })
 
         })
 
       })
-      $scope.getUpperDash();
+
       return;
 
 
@@ -3215,7 +3442,7 @@ function tileArr(arr,size){
 
 
         var total = parseFloat(data.production) + parseFloat(data.stop) + parseFloat(data.wait);
-        console.log("total",total);
+        console.log("total", total);
         var prodperc = parseFloat(data.production / total * 100);
         var stopperc = parseFloat(data.stop / total * 100);
 
@@ -3458,7 +3685,7 @@ function tileArr(arr,size){
 
       })
 
-      console.log("getriga400",$scope.riga400);
+      console.log("getriga400", $scope.riga400);
 
     }
 
@@ -3684,7 +3911,16 @@ function tileArr(arr,size){
 
     $scope.$on("iotbuffer", function (event, args) {
       var events = args.events;
+
+      iotchart.mapIot(args, $scope);
       var iotindex = args.iotindex;
+      console.log("iotbuffer received from socket server, eventtype " + args.evtype, args, iotchart.charts);
+      if (args.evtype == "temp2") {
+
+        //var iotindex = args.iotindex;
+        //iotchart.mapIot(args, $scope);
+      }
+
 
       //iotchart.mapIot(args,$scope);
 
@@ -3705,7 +3941,7 @@ function tileArr(arr,size){
       }
 
       if (evtype == "anomalylog.json") {
-        console.log("anomalylog",args);
+        console.log("anomalylog", args);
         if ($scope.anomalylog.length == 30) $scope.anomalylog.shift();
         $scope.anomalylog.push(args.events[0]);
         //console.log($scope.anomalylog.length);

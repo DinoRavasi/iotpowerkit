@@ -316,6 +316,18 @@ function getIotIndex(evtype) {
 }
 
 
+router.get("/iotmap",function(req,res){
+
+    dbs.listByField("config","name","iotmap",function(data){
+
+        var iotmap=data.rows[0].doc.data;
+        res.send(iotmap);
+
+    })
+
+})
+
+
 
 router.get("/test", function (req, res) {
 

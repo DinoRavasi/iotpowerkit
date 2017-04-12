@@ -5,8 +5,9 @@
       Anomaly Trend
     </div>
     <section flex="50">
-<canvas height="160" id="line" class="chart chart-line" chart-data="linedata" chart-labels="linelabels" chart-legend="true"
-                    chart-series="lineseries" chart-options="{showTooltips: true, legend: {display:false}}"></canvas>
+      <iotchart datasource="charts[4]"></iotchart>
+<!--<canvas height="160" id="line" class="chart chart-line" chart-data="linedata" chart-labels="linelabels" chart-legend="true"
+                    chart-series="lineseries" chart-options="{showTooltips: true, legend: {display:false}}"></canvas>-->
 	
 	</section>
   </div> 
@@ -97,7 +98,8 @@
       Roll Force (Work Side and Drive Side)
     </div>
     <section flex="50">
-<canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[0].data" chart-labels="sensormeasurement[0].labels" chart-legend="false"
+       <!--<iotchart datasource="charts[5]"></iotchart>-->
+ <canvas height="120" id="line" class="chart chart-line" chart-data="sensormeasurement[0].data" chart-labels="sensormeasurement[0].labels" chart-legend="false"
                     chart-series="sensormeasurement[0].series" chart-options="{showTooltips: true, legend: { display: false}}"></canvas>
 	
 	</section>

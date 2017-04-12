@@ -31,7 +31,7 @@ var deviceClientConnected = false;
 
 var simulationactive = true;
 
-
+/*
 var simuls = [{
 
         intervalTimer: null,
@@ -39,6 +39,7 @@ var simuls = [{
         status_on: true,
         filename: "productionoutputwithtarget.json",
         filesource: "https",
+        boxfilename: "productionoutputwithtarget",
         httpsurl: boxf.getBoxFile("productionoutputwithtarget"),
         shttpsurl: "/shared/static/uj676p6rs32j7q6eid70rgdslqd56q1u.json",
         evtype: "productionoutputwithtarget.json",
@@ -54,6 +55,7 @@ var simuls = [{
         status_on: true,
         filename: "LU_measurement_profile",
         filesource: "https",
+        boxfilename: "measurement_profile_new",
         httpsurl: boxf.getBoxFile("measurement_profile_new"),
         //httpsurl: "/shared/static/ng9y3dc7r4qptrcpv5xr9gkrxl6hncmd.json",
         evtype: "measurementprofile.json",
@@ -72,6 +74,7 @@ var simuls = [{
         status_on: true,
         filename: "HealthyScoreTrend.json",
         filesource: "https",
+        boxfilename: "healthscoretrend",
         httpsurl: boxf.getBoxFile("healthscoretrend"),
         shttpsurl: "/shared/static/b0uvluvjwxpunbwrd06hu9nbashcbdep.json",
         evtype: "TimeHistory_H1000_LU30.json",
@@ -88,9 +91,11 @@ var simuls = [{
         status_on: true,
         //filename: "LU30_Energy_Paker_TH.json",
         filename: "MAKER_Scarti_sigarette.json",
+        boxfilename: "equipmentavailability",
         httpsurl: boxf.getBoxFile("equipmentavailability"),
         shttpsurl: "/shared/static/jo33sa5y17t4ynlz64wr4if7pll1zeba.json",
         filesource: "https",
+
         dfilename: "MessageHistory_121P_LU30_TH2.json",
         evtype: "MAKER_Scarti_sigarette.json",
         buffer: [],
@@ -98,22 +103,7 @@ var simuls = [{
         rowindex: -1,
         fields: "Availability",
     },
-    /*
-    {
 
-        intervalTimer: null,
-        interval: 4000,
-        status_on: false,
-        filename: "TimeHistory_H1000_LU30.json",
-        filesource: "https",
-        httpsurl: "/shared/static/479glx1xkf89m3a9bcb3qxai4h7ybv31.json",
-        evtype: "TimeHistory_H1000_LU30.json",
-        rowindex: -1,
-        buffer: [],
-        fields: "True_duration",
-        buffersize: 1000
-
-    },*/
     {
         descr: "anomalylog",
         intervalTimer: null,
@@ -121,6 +111,7 @@ var simuls = [{
         status_on: true,
         filename: "anomalylog.json",
         filesource: "https",
+        boxfilename: "anomalylog",
         httpsurl: boxf.getBoxFile("anomalylog"),
         shttpsurl: "/shared/static/hssd2rp19ub03rrps71c1zh23kpxfyu1.json",
         evtype: "anomalylog.json",
@@ -139,6 +130,7 @@ var simuls = [{
         status_on: true,
         filename: "conditionindicators.json",
         filesource: "https",
+        boxfilename: "conditionindicators",
         httpsurl: boxf.getBoxFile("conditionindicators"),
         shttpsurl: "/shared/static/ivl2djnv5yqhbnj528wjrrnxhziauchj.json",
         evtype: "conditionindicators.json",
@@ -157,6 +149,7 @@ var simuls = [{
         status_on: true,
         filename: "sensor_x1.json",
         filesource: "https",
+        boxfilename: "sensor_x1",
         httpsurl: boxf.getBoxFile("sensor_x1"),
         shttpsurl: "/shared/static/ym6k4jng8nlbkeaubmssnhlwvaue5n4q.json",
         evtype: "sensormeasurement.json",
@@ -172,6 +165,7 @@ var simuls = [{
         status_on: true,
         filename: "sensor_x2.json",
         filesource: "https",
+        boxfilename: "sensor_x2",
         httpsurl: boxf.getBoxFile("sensor_x2"),
         shttpsurl: "/shared/static/dq9vewly61r7oqhrqd53133q7d757tii.json",
         evtype: "sensormeasurement.json",
@@ -190,6 +184,7 @@ var simuls = [{
         status_on: true,
         filename: "sensor_x3.json",
         filesource: "https",
+        boxfilename: "sensor_x3",
         httpsurl: boxf.getBoxFile("sensor_x3"),
         shttpsurl: "/shared/static/pehv9nkgzwpvx03kn0d4hwbvu03uu32a.json",
         evtype: "sensormeasurement.json",
@@ -208,6 +203,7 @@ var simuls = [{
         status_on: true,
         filename: "LU30_Event Log.json",
         filesource: "https",
+        boxfilename: "equipmentanomalylog",
         httpsurl: boxf.getBoxFile("equipmentanomalylog"),
         shttpsurl: "/shared/static/ckbsutwujpk9vc09qyllvyvhw7d0d6qz.json",
         evtype: "equipmentanomalylog.json",
@@ -225,6 +221,7 @@ var simuls = [{
         interval: 4300,
         status_on: true,
         filename: "EquipmentFailurModel.json",
+        boxfilename: "equipmentfailuremodel",
         filesource: "https",
         httpsurl: boxf.getBoxFile("equipmentfailuremodel"),
         shttpsurl: "/shared/static/gy7j9ci5apj1wcps6530ii2wl6wpxubx.json",
@@ -237,25 +234,12 @@ var simuls = [{
 
 
     }
-    /*,
-    {
-        descr: "sensormeasurement",
-        intervalTimer: null,
-        interval: 2000,
-        status_on: false,
-        filename: "sensormeasurement.json",
-        filesource: "https",
-        httpsurl: "/shared/static/p13iiwphchgkouxmc6xeb2azt11gopj3.json",
-        evtype: "sensormeasurement.json",
-        rowindex: -1,
-        buffer: [],
-        fields: "Name,Value,Timestamp",
-        buffersize: 1000,
 
-        
-
-    }*/
 ];
+*/
+
+var simuls = [];
+
 
 
 //SIMULATION
@@ -267,7 +251,18 @@ var simultimer = {
     rowindex: 0
 }
 
-setSimulOn(simulationactive);
+loadSimulations(function (data) {
+    simuls.forEach(function(item,idx){
+
+        item.intervalTimer=null;
+        item.rowindex=-1;
+        item.buffer=[];
+    })
+    setSimulOn(simulationactive);
+})
+
+
+
 
 
 
@@ -311,9 +306,9 @@ function setSimulOn(tf) {
     } else {
         var activesimulscount = 0;
         simuls.forEach(function (item, idx) {
-             clearInterval(item.intervalTimer);
+            clearInterval(item.intervalTimer);
             if (item.status_on) {
-               
+
                 activesimulscount++;
             }
         });
@@ -754,16 +749,16 @@ function simulIntervalFuncLocal(args) {
 
 function simulIntervalFuncHttps(args) {
 
-    
+
     var simultimer = simuls[args];
-   
+
     var fname = simultimer.filename;
     var warnings = [];
     //console.log("simultimer buffer length",simultimer.buffer.length);
-     //console.log("SimulIntervalFuncHttps", args, simultimer.evtype,simultimer.buffer.length,simultimer.requestinprogress);
+    //console.log("SimulIntervalFuncHttps", args, simultimer.evtype,simultimer.buffer.length,simultimer.requestinprogress);
     if (simultimer.buffer.length == 0) {
         if (simultimer.requestinprogress == true) return;
-        
+
 
 
 
@@ -775,7 +770,8 @@ function simulIntervalFuncHttps(args) {
         //utils.colog("FROM FILE simulation id "+args+", emitting line " + simultimer.rowindex + " from file " + fname);
         //return;
         //fdbs.readJsonLine("data/" + fname, simultimer.rowindex, function (data, reset) {
-        var url = simultimer.httpsurl;
+        //var url = simultimer.httpsurl;
+        var url = boxf.getBoxFile(simultimer.boxfilename);
         simultimer.requestinprogress = true;
         fdbs.readJsonBufferRemoteHttps(url, simultimer.rowindex, simultimer.buffersize, function (data, reset) {
 
@@ -843,6 +839,8 @@ function simulIntervalFuncHttps(args) {
         var emitdata = {
             events: events,
             evtype: simultimer.evtype,
+            boxfilename: simultimer.boxfilename,
+            boxfileurl: boxf.getBoxFile(simultimer.boxfilename),
             iotindex: args,
             field: field,
             warnings: warnings,
@@ -859,6 +857,30 @@ function simulIntervalFuncHttps(args) {
     }
 
 }
+
+
+
+function loadSimulations(callback) {
+    dbs.listByField("config", "name", "simulations", function (data) {
+        //console.log(data.rows[0].doc);
+
+
+        simuls = data.rows[0].doc.data;
+
+        console.log(simuls.length + " simulations loaded");
+        if (callback) callback(simuls);
+
+    })
+}
+
+
+router.get("/reloadall", function (req, res) {
+    loadSimulations(function (data) {
+        setSimulOn(simulationactive);
+        res.send(simuls.length+" simulations reloaded");
+    })
+
+})
 
 
 
