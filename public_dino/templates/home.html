@@ -23,10 +23,11 @@
 
 <script src="lib/shutterJS/jquery.shutter.js"></script>
 
+<!--
         <div flex layout="row" style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #325c80; color: white">
-            <md-card style="width: 100px; height: 50px; margin: 2px;">
+            <md-card style="width: 130px; background-color:  #325c80; box-shadow: 0px 0px;">
                 <md-card-header style="padding: 1px;">
-                    <img id="backgroundimage" style="height: 48px;" src="img/logo_IBM01.png" border="0" alt="">
+                    <img id="backgroundimage" src="img/logo_IBM01.png" border="0" alt="">
                 </md-card-header>
             </md-card>
             <md-card class="boxtimeframe" style="width: 700px;">
@@ -37,6 +38,7 @@
                 </md-card-header>
             </md-card>
         </div>
+		
     <div flex layout="row" style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #325c80; color: #000000">
 
 			<md-card flex class="boxtimeframe">
@@ -53,32 +55,172 @@
 					<a href="/#/dash"><img style="width: 100%; height: 100%" ng-src="img/world_italy_map.png" /></a>
 				</md-card-content>
             </md-card>
-			<!--
-			<md-card flex class="boxtimeframe">
-                <md-card-header style="padding: 1px;">
-					<div id="galleryGD">
-						<ul>
-							<li><img src="img/gallery/121A.jpg" alt="121A.jpg" width="640" height="400"/></li>
-							<li><img src="img/gallery/121P-16K.jpg" alt="121P-16K.jpg" width="640" height="400"/></li>
-							<li><img src="img/gallery/DF10.jpg" alt="DF10.jpg" width="640" height="400"/></li>
-							<li><img src="img/gallery/mcp.jpg" alt="mcp.jpg" width="640" height="400"/></li>
-							<li><img src="img/gallery/SNUS.jpg" alt="SNUS.jpg" width="640" height="400"/></li>
-							<li><img src="img/gallery/X3.jpg" alt="X3.jpg" width="640" height="400"/></li>
-						</ul>
-					</div>
-                </md-card-header>
-            </md-card>
-			-->
 			<md-card flex class="boxtimeframe">
                 <md-card-header style="padding: 1px;">
                     &nbsp;
                 </md-card-header>
             </md-card>
 	</div>
+-->
+<style>
+#map-container2 {
+  height: 100%;
+}
+
+#map {
+  height: 80%;
+}
+</style>	
+    <div flex layout="row" style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #325c80; color: #000000">
+
+			<md-card flex class="boxtimeframe">
+                <md-card-header style="padding: 1px;">
+					&nbsp;
+                </md-card-header>
+            </md-card>
+
+			<md-card flex="66" style="margin-top: 40px;">
+				<md-card-content>
+				
+							<div flex layout="row" style="font-size: 12px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #ffffff; color: white">
+            <md-card style="width: 130px; background-color:  ##ffffff; box-shadow: 0px 0px;">
+                <md-card-header style="padding: 1px;">
+                    <img id="backgroundimage" src="img/ibm_logo-login.png" border="0" alt="" style="width: 130px; height: 56px;">
+                </md-card-header>
+            </md-card>
+			 <md-card style="background-color:  #ffffff; box-shadow: 0px 0px;">
+                <md-card-header style="padding: 1px;">
+                   <h1 class="tlt" style="color:  #325c80;">ADVANCED AFTER SALES SYSTEM</h1>
+                </md-card-header>
+            </md-card>
+        </div>
+				
+				
+						<div id="map" flex style="min-height: 500px; position: initial;"></div>
+		
+
+				</md-card-content>
+            </md-card>
+
+			<md-card flex class="boxtimeframe">
+                <md-card-header style="padding: 1px;">
+                    &nbsp;
+                </md-card-header>
+            </md-card>
+	</div>	
+
+<script>
+
+var url = window.location.href
+var arr = url.split("/");
+var result = arr[0] + "//" + arr[2]
+
+L.mapbox.accessToken = 'pk.eyJ1IjoiZGlub3JhdmFzaSIsImEiOiJjajFjYmQwcDkwMDAyMzNvM2l4dm9jMG9wIn0.FsBpTk3hqcqzjm79Bsf2Mg';
+
+var mapIOT = L.mapbox.map('map', 'mapbox.light')
+  .setView([45.471737, -9.299773], 3);
+var myLayer = L.mapbox.featureLayer().addTo(mapIOT);
+
+
+var geojson = [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [9.299773, 45.471737 ]
+    },
+    properties: {
+      title: 'Italy',
+	  "description": "Warning on Machine_03<br> <a href=\""+result+"/#/dash\" rel=\"noreferrer\" title=\"\">Open Dashboard</a>",
+      'marker-color': '#c40505',
+      'marker-size': 'large',
+      'marker-symbol': 'roadblock'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-3.703790, 40.416775 ]
+    },
+    properties: {
+      title: 'Spain',
+      description: 'Everything is OK',
+      'marker-color': '#07b50f',
+      'marker-size': 'large',
+      'marker-symbol': 'star'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-81.515754, 27.664827 ]
+    },
+    properties: {
+        "title": "Florida (USA)",
+      'marker-color': '#07b50f',
+      'marker-size': 'large',
+      'marker-symbol': 'star',
+      "description": "Everything is OK"	  
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [35.243322, 38.963745]
+    },
+    properties: {
+      title: 'Turkey',
+      description: 'Everything is OK',
+      'marker-color': '#07b50f',
+      'marker-size': 'large',
+      'marker-symbol': 'star'
+    }
+  }
+];
+myLayer.setGeoJSON(geojson);
+
+//var myIconGreen = L.icon({
+//	iconUrl: '../img/marker-icon-green.png',
+//	iconRetinaUrl: 'my-icon@2x.png',
+//	iconSize: [25, 41],
+//	iconAnchor: [12, 41],
+//	popupAnchor: [-3, -76],
+//	shadowUrl: 'my-icon-shadow.png',
+//	shadowRetinaUrl: 'my-icon-shadow@2x.png',
+//	shadowSize: [68, 95],
+//	shadowAnchor: [22, 94]
+//});  
+
+//margin-left: -12px; margin-top: -41px; width: 25px; height: 41px
+  
+//var myIconRed = L.icon({
+//	iconUrl: '../img/marker-icon-red.png',
+//	iconRetinaUrl: 'my-icon@2x.png',
+//	iconSize: [25, 41],
+//	iconAnchor: [12, 41],
+//	popupAnchor: [-3, -76],
+//	shadowUrl: 'my-icon-shadow.png',
+//	shadowRetinaUrl: 'my-icon-shadow@2x.png',
+//	shadowSize: [68, 95],
+//	shadowAnchor: [22, 94]
+//});   
+  
+//L.marker([45.471737, 9.299773], {icon: myIconRed}).addTo(mapLeaflet);		// Segrate ITALY
+//L.marker([37.775408, -122.413682], {icon: myIconGreen}).addTo(mapLeaflet);	// California USA
+//L.marker([40.416775, -3.703790], {icon: myIconGreen}).addTo(mapLeaflet);	// madrid spain
+//L.marker([38.963745, 35.243322], {icon: myIconGreen}).addTo(mapLeaflet);	// Turkye
+
+// mapLeaflet.scrollWheelZoom.disable();	// disabilitare 
+</script>
+	
 <script>
 $(function () {
 	$('.tlt').textillate({ in: { effect: 'flash' } });
 })
+
 
 $(document).ready(function(){
 

@@ -12,8 +12,6 @@
 
     <div flex layout="row" style="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #325c80; color: #000000">
 
-
-	
 			<md-card flex class="boxtimeframe">
                 <md-card-header style="padding: 1px;">
 					&nbsp;
@@ -23,30 +21,17 @@
 			<md-card flex="50" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;">
 			
 			
-			<md-card-header style="padding: 1px;">
-			
-			<div flex layout="row" style="font-size: 12px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #ffffff; color: white">
-            <md-card style="width: 130px; background-color:  #ffffff; box-shadow: 0px 0px;">
-                <md-card-header style="padding: 1px;">
-                    <img id="backgroundimage" src="img/ibm_logo-login.png" border="0" alt="" style="width: 130px; height: 56px;">
-                </md-card-header>
-            </md-card>
-			 <md-card style="background-color:  #ffffff; box-shadow: 0px 0px;">
-                <md-card-header style="padding: 1px;">
-                   <h1 class="tlt" style="color:  #325c80;">Advanced After Sales System&nbsp;&nbsp;</h1>
-                </md-card-header>
-            </md-card>
-        </div>
-			
-			</md-card-header>
-			
                 <md-card-content>
+	<div class="row">
+		<div class="col text-center">
+			<img height="170" alt="BCRS" src="img/logo_IBM01.png">	
+			<h1 class="tlt" style="color: #000000"><b>Machine Monitoring</b></h1>
+						<h3 style="color: #E71D32">{{userlogged}}</h3>
+		</div>
+	</div>
 
-						<md-card flex="66">
-				<md-card-content>
-	
-						<h3 style="color: #E71D32">{{userlogged}}</h3>		
-<form name="Form">
+        
+          <form name="Form">
             <md-input-container class="md-block">
               <label>User ID</label>
               <input type="text" name="email" ng-model="data.username" placeholder="Insert your User ID" required="" md-maxlength="50"/>
@@ -66,22 +51,7 @@
             <md-button ng-disabled="!Form.$valid" ng-click="login()" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
           </form>
         </md-card-content>
-	
-
-				</md-card-content>
-            </md-card
-			
-			
-						<md-card flex class="boxtimeframe">
-                <md-card-header style="padding: 1px;">
-					&nbsp;
-                </md-card-header>
             </md-card>
-			
-
-        
-
-		</md-card>
 			<md-card flex class="boxtimeframe">
                 <md-card-header style="padding: 1px;">
                     &nbsp;

@@ -13,8 +13,7 @@ var apitoken = "VIDMNZUlj6mzm(QyQ6";
 */
 
 
-var apikey = "a-nzxiyo-wvx6u9zd0u";
-var apitoken = "!&)uyqq9lcR3Kx-QS7";
+
 
 var buffersize = 10;
 var evbuffersize = 10;
@@ -83,6 +82,19 @@ var iotevents = [{
     interval: 1000,
     fields: "",
     status_on: false,
+    deviceType: "Android",
+    deviceId: "121212",
+    evtype: "accel",
+    rowindex: -1,
+    buffer: [],
+    buffersize: 2,
+    buffercount: 0
+},{
+    active: true,
+    intervalTimer: null,
+    interval: 1000,
+    fields: "",
+    status_on: false,
     deviceType: "SiemensPlc",
     deviceId: "12345678",
     evtype: "event",
@@ -128,21 +140,29 @@ var iotevents = [{
 
 
 
-/*
+
+
+
+var apikey = "a-qc7qlc-7x4vfeo0i6";
+var apitoken = "VIDMNZUlj6mzm(QyQ6";
 var iot = {};
 iot.APIKey = apikey;
 iot.AuthToken = apitoken;
 iot.OrgId = "qc7qlc";
 iot.active = true;
 var totcount = 0;
-*/
 
+
+/*
+var apikey = "a-nzxiyo-wvx6u9zd0u";
+var apitoken = "!&)uyqq9lcR3Kx-QS7";
 var iot = {};
 iot.APIKey = apikey;
 iot.AuthToken = apitoken;
 iot.OrgId = "nzxiyo";
 iot.active = true;
 var totcount = 0;
+*/
 
 var appClient = new WIoT.IotfApplication({
     "org": iot.OrgId,
@@ -170,12 +190,12 @@ appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, p
 
     if (!iot.active) return;
 
-     //console.log("deviceEvent ! - devtypeid: " + deviceType + ":" + deviceId + ", eventType " + eventType);
+     console.log("deviceEvent ! - devtypeid: " + deviceType + ":" + deviceId + ", eventType " + eventType);
   
 
 
 
-
+   //console.log("searching for devicetype "+deviceType+" and deviceid "+deviceId);
 
     iotevents.forEach(function (iotitem, idx) {
 
@@ -184,13 +204,21 @@ appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, p
         var active=false;
         var doIt = false;
 
+        //console.log(devtype,devid);
+     
+
         if (iotitem.hasOwnProperty("active")){
             if (String(iotitem.active)=="true") active=true;
-
+           // console.log("has iot.active","active",active);
         }
 
-        if ((devtype == deviceType) && (devid == deviceId)) doIt = true;
-        if (!active) doIt=false;
+        if ((devtype == deviceType) && (devid == deviceId)) {
+           // console.log("found device ! ",devtype,devid)
+            doIt = true;
+        }
+        if (String(active)!="true") doIt=false;
+
+      //  console.log("doIt",doIt);
 
      
 
@@ -198,7 +226,7 @@ appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, p
         //var idx=getIotIndex(eventType);
         //console.log("iotindex",idx);
         if (doIt) {
-            //console.log("deviceEvent ! - devtypeid: " + deviceType + ":" + deviceId + ", eventType " + eventType);
+           // console.log("deviceEvent ! - devtypeid: " + deviceType + ":" + deviceId + ", eventType " + eventType);
             if (idx == -1) return;
             var iotevent = iotevents[idx];
 

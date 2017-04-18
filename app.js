@@ -5,7 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var WIoT = require("ibmiotf");
-var socketio=require('socket.io');
+var fs = require("fs");
+var socketio = require('socket.io');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -138,59 +139,59 @@ app.get("/device/:dbname", function (req, res) {
 
 })
 
-app.get("/setdashtimer/:status",function(req,res){
-    var status=req.params.status.toLowerCase().trim();
-    var retvalue={
-        msg: "DashTimer has been turned ON - interval setted to "+dashTimer.interval
-    }
-    if (status=="on") {
+app.get("/setdashtimer/:status", function (req, res) {
+	var status = req.params.status.toLowerCase().trim();
+	var retvalue = {
+		msg: "DashTimer has been turned ON - interval setted to " + dashTimer.interval
+	}
+	if (status == "on") {
 		setDashTimer(true);
 		utils.colog(retvalue.msg);
 	}
-    if (status=="off") {
-        setDashTimer(false);
-        retvalue.msg="DashTimer has been turned OFF";
+	if (status == "off") {
+		setDashTimer(false);
+		retvalue.msg = "DashTimer has been turned OFF";
 		utils.colog(retvalue.msg);
-    }
+	}
 	res.send(retvalue);
 
 })
 
 
-app.get("/importcsv2/:csvfilename/:start/:buffersize",function(req,res){
+app.get("/importcsv2/:csvfilename/:start/:buffersize", function (req, res) {
 	var csvfilename = req.params.csvfilename;
-	var start=req.params.start;
-	var buffersize=req.params.buffersize;
+	var start = req.params.start;
+	var buffersize = req.params.buffersize;
 
 
-	for (var i=0; i<100; i++) {
-		var startrec=i*buffersize;
-		console.log("startrec",startrec);
+	for (var i = 0; i < 100; i++) {
+		var startrec = i * buffersize;
+		console.log("startrec", startrec);
 
-	fdbs.readCsvBuffer("data/"+csvfilename,startrec,buffersize,function(data,cm){
-		console.log(data);
-		data.rowlength=data.rows.length;
-		setTimeout(function(){}, 3000);
-		dbs.insert_bulk("lu30bis",data.rows,function(dbdata){
-			console.log("bulk insert completed");
+		fdbs.readCsvBuffer("data/" + csvfilename, startrec, buffersize, function (data, cm) {
+			console.log(data);
+			data.rowlength = data.rows.length;
+			setTimeout(function () {}, 3000);
+			dbs.insert_bulk("lu30bis", data.rows, function (dbdata) {
+				console.log("bulk insert completed");
+			})
+
 		})
-		
-	})
 
-	setTimeout(function(){}, 3000);
+		setTimeout(function () {}, 3000);
 
-}
-res.send("done");
+	}
+	res.send("done");
 
 })
 
 
 app.get("/importcsv/:csvfilename", function (req, res) {
 	var csvfilename = req.params.csvfilename;
-	var separator="|";
-	if (req.query.separator) separator=req.query.separator;
+	var separator = "|";
+	if (req.query.separator) separator = req.query.separator;
 
-	if (csvfilename.indexOf(".csv")==-1) csvfilename=csvfilename+".csv";
+	if (csvfilename.indexOf(".csv") == -1) csvfilename = csvfilename + ".csv";
 
 	var fields = [];
 	var inserted = 0;
@@ -203,7 +204,7 @@ app.get("/importcsv/:csvfilename", function (req, res) {
 		readline = require('readline');
 
 	var rd = readline.createInterface({
-		input: fs.createReadStream('data/'+csvfilename),
+		input: fs.createReadStream('data/' + csvfilename),
 		output: process.stdout,
 		terminal: false
 	});
@@ -227,13 +228,13 @@ app.get("/importcsv/:csvfilename", function (req, res) {
 			var foundnonblank = false;
 
 			values.forEach(function (item, idx) {
-				var campo = fields[idx].replaceAll(" ","");
+				var campo = fields[idx].replaceAll(" ", "");
 				//console.log(campo);
 				var sitem = item;
 				if (campo == "type") {
 					//console.log("item",item);
 
-					sitem=sitem.replaceAll('\"','');
+					sitem = sitem.replaceAll('\"', '');
 
 					/*sitem = sitem.replace('\"', '');
 					sitem = sitem.replace('\"', '');*/
@@ -259,8 +260,8 @@ app.get("/importcsv/:csvfilename", function (req, res) {
 	rd.on("close", function () {
 		console.log("firnuto, documents n.", inserted);
 		//fs.writeFile('data/lu30.json', JSON.stringify(output,null, ' '));
-		var jsonfilename=csvfilename.replace(".csv",".json");
-		fs.writeFile('data/'+jsonfilename, JSON.stringify(output));
+		var jsonfilename = csvfilename.replace(".csv", ".json");
+		fs.writeFile('data/' + jsonfilename, JSON.stringify(output));
 		res.send(output);
 		/*dbs.insert_bulk("lu30",output.rows,function(data){
 			console.log("bulk insert completed");
@@ -316,17 +317,17 @@ app.get("/importcsvtofile/:csvfilename", function (req, res) {
 				var campo = fields[idx];
 				//console.log(campo);
 				var sitem = item;
-				
-					//console.log("item",item);
 
-					sitem=sitem.replaceAll('\"','');
-					/*sitem = sitem.replace('\"', '');
-					sitem = sitem.replace('\"', '');
-					sitem = sitem.replace('\"', '');
-					sitem = sitem.replace('\"', '');
-					sitem = sitem.replace('\"', '');*/
-					
-				
+				//console.log("item",item);
+
+				sitem = sitem.replaceAll('\"', '');
+				/*sitem = sitem.replace('\"', '');
+				sitem = sitem.replace('\"', '');
+				sitem = sitem.replace('\"', '');
+				sitem = sitem.replace('\"', '');
+				sitem = sitem.replace('\"', '');*/
+
+
 				docjson[campo] = sitem;
 
 				if (item.trim() != "") foundnonblank = true;
@@ -342,13 +343,13 @@ app.get("/importcsvtofile/:csvfilename", function (req, res) {
 
 				//if (inserted<10) console.log(sj);
 
-					var sout = "";
-					if (sj.indexOf("{") == -1) sj = "{" + sj + "}";
-					if (inserted > 1) sout += ",";
-					sout += sj;
-					fs.appendFileSync('data/' + csvfilename + '.json', sout);
+				var sout = "";
+				if (sj.indexOf("{") == -1) sj = "{" + sj + "}";
+				if (inserted > 1) sout += ",";
+				sout += sj;
+				fs.appendFileSync('data/' + csvfilename + '.json', sout);
 
-		
+
 
 				//output.rows.push(docjson);
 
@@ -376,7 +377,7 @@ app.get("/importcsvtofile/:csvfilename", function (req, res) {
 
 app.get("/readfile/:fname", function (req, res) {
 	var fname = req.params.fname;
-	if (fname.indexOf(".json")==-1) fname=fname+".json";
+	if (fname.indexOf(".json") == -1) fname = fname + ".json";
 	fname = "data/" + fname;
 	fdbs.readJsonFile(fname, function (data) {
 		console.log(data.rows.length)
@@ -387,10 +388,10 @@ app.get("/readfile/:fname", function (req, res) {
 })
 
 
-app.get("/reloadboxfiles",function(req,res){
-	boxfiles.loadBoxFiles(function(data){
-			
-			res.send(data);
+app.get("/reloadboxfiles", function (req, res) {
+	boxfiles.loadBoxFiles(function (data) {
+
+		res.send(data);
 
 	})
 
@@ -398,31 +399,75 @@ app.get("/reloadboxfiles",function(req,res){
 })
 
 
-app.get("/companyconfig",function(req,res){
+app.get("/companyconfig", function (req, res) {
 
-	fmodel.loadCompanyConfig(function(data){
+	fmodel.loadCompanyConfig(function (data) {
 		res.send(data);
 
 	});
-	
+
 
 
 })
 
 
-app.get("/db2",function(req,res){
+app.get("/xls/:sheet", function (req, res) {
 
-	db2.open(function(data){
+	var sheet = req.params.sheet;
+	var exceltojson = require("xlsx-to-json-lc");
 
-		var q="select * from TimeHistory_H1000_LU30";
-		//q="select * from attrib_cassonetto";
-		db2.query(q,function(qdata){
+	var arr = ["Data01", "Data02"];
+	var xlsfname="datasource.xlsx";
+	var xlsfnameout=xlsfname.split(".")[0]+"_out."+xlsfname.split(".")[1];
+
+
+
+	exceltojson({
+		input: "data/"+xlsfname,
+		output: "data/"+xlsfnameout,
+		sheet: sheet, // specific sheetname inside excel file (if you have multiple sheets)
+		lowerCaseHeaders: true //to convert all excel headers to lowr case in json
+	}, function (err, result) {
+		if (err) {
+			console.error("error", err);
+			res.send(err);
+		} else {
+			//console.log("xls file read", result);
+			//result will contain the overted json data
+			var jsontxt = JSON.stringify(result, null, '\t');
+
+			var jsonfname="data/xls_"+sheet+".json";
+			fs.writeFile(jsonfname, jsontxt, function (err) {
+				if (err) return console.error(err);
+				console.log('xls sheet '+sheet+" saved in file "+jsonfname);
+				res.send(result);
+			})
 			
+		}
+	});
+
+
+
+
+
+
+
+})
+
+
+app.get("/db2", function (req, res) {
+
+	db2.open(function (data) {
+
+		var q = "select * from TimeHistory_H1000_LU30";
+		//q="select * from attrib_cassonetto";
+		db2.query(q, function (qdata) {
+
 			res.send(qdata);
 
 		})
 
-		
+
 
 	})
 
@@ -462,27 +507,29 @@ app.use(function (err, req, res, next) {
 
 
 var port = parseInt(process.env.VCAP_APP_PORT, 10) || 3000;
-global.io = socketio.listen(app.listen(port,function(){
+global.io = socketio.listen(app.listen(port, function () {
 
-	  console.log("IBM DBGIoT Server ver. 1.0");
-	  console.log("Listening on port "+port);
-	  //app.set('socketio', io);
-	  //console.log("utils.io",utils.io);
+	console.log("IBM DBGIoT Server ver. 1.0");
+	console.log("Listening on port " + port);
+	//app.set('socketio', io);
+	//console.log("utils.io",utils.io);
 
 }));
 
 
 
 io.sockets.on('connection', function (socket) {
-	sock=socket;
-	console.log("socket "+socket.id+" connected");
-	socket.emit('getclientspecs', {id: socket.id});
+	sock = socket;
+	console.log("socket " + socket.id + " connected");
+	socket.emit('getclientspecs', {
+		id: socket.id
+	});
 });
 
 
 String.prototype.replaceAll = function (find, replace) {
-    var str = this;
-    return str.replace(new RegExp(find, 'g'), replace);
+	var str = this;
+	return str.replace(new RegExp(find, 'g'), replace);
 };
 
 

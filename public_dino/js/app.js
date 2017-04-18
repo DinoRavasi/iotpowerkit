@@ -570,7 +570,13 @@ angular.module('iotapp', [
           "umid",
           "temp"
         ]
-      }
+      },
+      {
+        id: "acceleration_x",
+        evtype: "accel"
+      
+    }
+
 
 
       
