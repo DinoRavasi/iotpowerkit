@@ -7,7 +7,7 @@
 6 silly lifecycle DBGIOT@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle DBGIOT@0.0.0~start: DBGIOT@0.0.0
 8 verbose lifecycle DBGIOT@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle DBGIOT@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/pietroturati/Desktop/demy/PROJECTS/pocs/IOT/server_git/node_modules/.bin:/Users/pietroturati/.yarn/bin:/Users/pietroturati/Library/Android/sdk//tools:/Users/pietroturati/Library/Android/sdk//platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/pietroturati/Library/Android/sdk/platform-tools:/Users/pietroturati/Library/Android/sdk/tools:/Users/pietroturati/.yarn/bin:/Users/pietroturati/Library/Android/sdk//tools:/Users/pietroturati/Library/Android/sdk//platform-tools
+9 verbose lifecycle DBGIOT@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/pietroturati/Desktop/demy/PROJECTS/pocs/IOT/server_git/node_modules/.bin:/Users/pietroturati/.yarn/bin:/Users/pietroturati/Library/Android/sdk//tools:/Users/pietroturati/Library/Android/sdk//platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/pietroturati/Library/Android/sdk/platform-tools:/Users/pietroturati/Library/Android/sdk/tools
 10 verbose lifecycle DBGIOT@0.0.0~start: CWD: /Users/pietroturati/Desktop/demy/PROJECTS/pocs/IOT/server_git
 11 silly lifecycle DBGIOT@0.0.0~start: Args: [ '-c', 'node app' ]
 12 silly lifecycle DBGIOT@0.0.0~start: Returned: code: 1  signal: null
