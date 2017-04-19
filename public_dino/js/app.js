@@ -2100,7 +2100,7 @@ angular.module('iotapp', [
       console.log("machine", machine);
       var confirm = $mdDialog.confirm()
         .title('Warning on ' + machine)
-        .textContent('Engine 7 of machine ' + machine + ', line ' + $scope.phases[0].name + ', ' + $scope.companyconfig.plants[0].location + '  plant has reached a failure probability of 80% within 3 days. No maintenance activities planned. Do you want to create a new work order request ?')
+        .textContent('Rotor Break of machine ' + machine + ', line ' + $scope.phases[0].name + ', ' + $scope.companyconfig.plants[0].location + '  plant has reached a failure probability of 80% within 3 days. No maintenance activities planned. Do you want to create a new work order request ?')
         .ariaLabel('Lucky day')
         .targetEvent(ev)
         .ok('Yes')
