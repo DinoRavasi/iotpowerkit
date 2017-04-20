@@ -637,7 +637,7 @@ angular.module('iotapp', [
 
     iotchart.mapIot = function (args, $scope) {
       var charts = iotchart.charts;
-      console.log("mapIot service event", args);
+      //console.log("mapIot service event", args);
       //check if there is a defined evtype equal to the buffered ones
       var foundiot = false;
       var iotindex = -1;
@@ -650,11 +650,11 @@ angular.module('iotapp', [
 
       })
       if (!foundiot) {
-        console.log("no iotcharts with evtype " + args.evtype + " found, exiting");
+        //console.log("no iotcharts with evtype " + args.evtype + " found, exiting");
         return;
       }
       var chart = iotchart.charts[iotindex];
-      console.log("working on chart", chart);
+      //console.log("working on chart", chart);
 
       if (!chart.chart) {
         chart.chart = {
@@ -694,7 +694,7 @@ angular.module('iotapp', [
           }
 
         }
-        console.log("no fields defined for chart " + chart.id + ", added fields " + chart.fields.join(",") + " basing on events received");
+        //console.log("no fields defined for chart " + chart.id + ", added fields " + chart.fields.join(",") + " basing on events received");
       }
 
 
@@ -2262,6 +2262,7 @@ angular.module('iotapp', [
         $scope.faultsLoading = true;
         var url = globals.rooturl + "/dashboard/getfaults?line=" + $scope.companyconfig.plants[0].productionlines[0].name + "&machine=" + $scope.selectedMachine.name;
         backend.get(url, function (data) {
+          console.log("faulst",data);
           $timeout(function () {
             $scope.faultsLoading = false;
             $scope.faults = data;
@@ -2371,7 +2372,9 @@ angular.module('iotapp', [
 
       $scope.PrePostventLoading = true
       var url = globals.rooturl + "/dashboard/getpostfaults?line=" + line + "&machine=" + machine;
+      console.log(url);
       backend.get(url, function (data) {
+        console.log(data);
         $timeout(function () {
           data2 = data
           data = sortJSON(data2, 'Support', 'disc') // SORT JSON asc = ascendente   disc= Discendente
@@ -2450,45 +2453,45 @@ angular.module('iotapp', [
         if (!$scope.linktoMaximo) {
           $scope.woClosed = [{
               "WONUM": "1606_LU-PK",
-              "DESCRIPTION": "LU30_13000_HRS_PK_REPORTED",
-              "LOCATION": "LU30",
-              "ASSETNUM": "GD-PK-10047"
+              "DESCRIPTION": "X01_line_13000_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
             },
             {
               "WONUM": "1609_LU-PK",
-              "DESCRIPTION": "LU30_13000_HRS_PK_REPORTED",
-              "LOCATION": "LU30",
-              "ASSETNUM": "GD-PK-10047"
+              "DESCRIPTION": "X01_line_13000_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
             },
             {
               "WONUM": "1610_LU-PK",
-              "DESCRIPTION": "LU30_13500_HRS_PK_REPORTED",
-              "LOCATION": "LU30",
-              "ASSETNUM": "GD-PK-10047"
+              "DESCRIPTION": "X01_line_13500_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
             },
             {
               "WONUM": "1608_LU-PK",
-              "DESCRIPTION": "LU30_12250_HRS_PK_REPORTED",
-              "LOCATION": "LU30",
-              "ASSETNUM": "GD-PK-10047"
+              "DESCRIPTION": "X01_line_12250_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
             },
             {
               "WONUM": "168B_LU-PK",
-              "DESCRIPTION": "LU30_12500_HRS_PK_REPORTED",
-              "LOCATION": "LU30",
-              "ASSETNUM": "GD-PK-10047"
+              "DESCRIPTION": "X01_line_12500_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
             },
             {
               "WONUM": "1703_LU-PK",
-              "DESCRIPTION": "LU30_14500_HRS_PK_REPORTED",
-              "LOCATION": "LU30",
-              "ASSETNUM": "GD-PK-10047"
+              "DESCRIPTION": "X01_line_14500_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
             },
             {
               "WONUM": "173A_LU-PK",
-              "DESCRIPTION": "LU30_14500_HRS_PK_REPORTED",
-              "LOCATION": "LU30",
-              "ASSETNUM": "GD-PK-10047"
+              "DESCRIPTION": "X01_line_14500_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
             }
           ]
           $scope.maximoload = false
@@ -3698,12 +3701,12 @@ angular.module('iotapp', [
     $scope.getEquipmentAnomalyCount = function () {
       var timeframe = globals.timeframe;
       var tfdate = globals.timeframedate;
-      console.log(timeframe);
+      //console.log(timeframe);
       var url = "/dashboard/equipmentanomalycount?tftype=" + timeframe.toLowerCase() + "&tfdate=" + tfdate;
       $scope.dashLoading.equipmentstops = true;
       backend.get(url, function (data) {
         $scope.dashLoading.equipmentstops = false;
-        console.log("equipmentanomalycount", data);
+        //console.log("equipmentanomalycount", data);
         $scope.renderEquipmentAnomalyCount(data);
 
       });
@@ -3920,7 +3923,7 @@ angular.module('iotapp', [
 
       iotchart.mapIot(args, $scope);
       var iotindex = args.iotindex;
-      console.log("iotbuffer received from socket server, eventtype " + args.evtype, args, iotchart.charts);
+      //console.log("iotbuffer received from socket server, eventtype " + args.evtype, args, iotchart.charts);
       if (args.evtype == "temp2") {
 
         //var iotindex = args.iotindex;
@@ -3947,7 +3950,7 @@ angular.module('iotapp', [
       }
 
       if (evtype == "anomalylog.json") {
-        console.log("anomalylog", args);
+        //console.log("anomalylog", args);
         if ($scope.anomalylog.length == 30) $scope.anomalylog.shift();
         $scope.anomalylog.push(args.events[0]);
         //console.log($scope.anomalylog.length);

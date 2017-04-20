@@ -51,8 +51,8 @@
                      <td style="width: 50%">{{f.Fault_Type}}</td>
                      <td style="width: 10%">{{numberWithCommas(f.Fault_count)}}</td>
                      <td style="width: 10%">{{f.Duration_hours}}</td>
-                     <td style="width: 30%"><button ng-click="getPreFaults(selectedLine.name,selectedMachine.name)" class="md-button md-primary md-raised" ng-disabled="(selectMachine.name!='H1000') && (f.Fault_Type!='SERVICE STOP BUTTON PRESSED')">Pre event</button>
-                     <button ng-click="getPostFaults(selectedLine.name,selectedMachine.name)" class="md-button md-primary md-raised" ng-disabled="(selectMachine.name!='H1000') && (f.Fault_Type!='SERVICE STOP BUTTON PRESSED')">Post event</button>
+                     <td style="width: 30%"><button ng-click="getPreFaults(selectedLine.name,selectedMachine.name)" class="md-button md-primary md-raised" ng-disabled="(selectMachine.name!='Machine_01') && (f.Fault_Type!='BUFFER FULL')">Pre event</button>
+                     <button ng-click="getPostFaults(selectedLine.name,selectedMachine.name)" class="md-button md-primary md-raised" ng-disabled="(selectMachine.name!='Machine_01') && (f.Fault_Type!='BUFFER FULL')">Post event</button>
                      </td> 
                  </tr>
 				</tbody>
