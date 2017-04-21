@@ -2181,6 +2181,7 @@ angular.module('iotapp', [
 
     //
     $scope.ShowMobileScreen = function (ev, wotopass, selecmac) {
+     
       $mdDialog.show({
           controller: MobileScreenController,
           controllerAs: 'Mobile',
@@ -2451,7 +2452,7 @@ angular.module('iotapp', [
         $scope.SearchWOClosed = true
 
         if (!$scope.linktoMaximo) {
-          $scope.woClosed = [{
+          $scope.woClosed2 = [{
               "WONUM": "1606_LU-PK",
               "DESCRIPTION": "X01_line_13000_HRS_PK_REPORTED",
               "LOCATION": "X01_line",
@@ -2494,6 +2495,28 @@ angular.module('iotapp', [
               "ASSETNUM": "FS-PK-10047"
             }
           ]
+      
+
+          $scope.woClosed=[];
+          $scope.woClosed2.forEach(function(item,idx){
+            var wonum=item.WONUM.split("_")[0]+"_"+$scope.macchinaselezionata;
+            var descr=item.DESCRIPTION.replace("_PK_","_"+$scope.macchinaselezionata+"_");
+            var assetnum=item.ASSETNUM.replace("-PK-","-"+$scope.macchinaselezionata+"-")
+          
+           
+
+            var newwo={
+              WONUM: wonum,
+              DESCRIPTION: descr,
+              LOCATION: item.LOCATION,
+              ASSETNUM: assetnum
+
+            }
+
+            $scope.woClosed.push(newwo);
+          })
+
+              console.log("woclosed",$scope.woClosed);
           $scope.maximoload = false
           $scope.SearchWOClosed = false
           return;
