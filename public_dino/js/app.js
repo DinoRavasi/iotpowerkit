@@ -2204,6 +2204,32 @@ angular.module('iotapp', [
         });
     };
 
+	
+    $scope.ShowMobileScreenMntHistory = function (ev, selecmac) {
+     
+      $mdDialog.show({
+          controller: MobileScreenControllerMntHistory,
+          controllerAs: 'MobileHistory',
+          templateUrl: 'templates/MaintenanceHistory.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          locals: {
+            dataToPass: selecmac,
+            linea: $scope.selectedLine.name
+          },
+          clickOutsideToClose: true,
+
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function (answer) {
+          $scope.status = '...';
+        }, function () {
+          $scope.status = '...';
+        });
+    };
+
+	
+	
     $scope.ShowMobileScreen2 = function (ev, macchina) {
       /*  backend.get("/dashboard/stops/" + $scope.selectedMachine.name, function (data) {
           console.log("stops", data);
@@ -2707,6 +2733,138 @@ angular.module('iotapp', [
       };
     }
 
+
+
+    function MobileScreenControllerMntHistory($scope, $mdDialog, backend, $timeout, $http, dataToPass, linea) {
+
+      $scope.ShowMaximoLoad = false
+      $scope.SearchWOPlanned = false
+      $scope.SearchTaskWOPlanned = false
+      $scope.SearchSpearPartsWOPlanned = false
+      $scope.SearchWOClosed = false
+
+      $scope.macchinaselezionata = dataToPass
+      $scope.linea = linea;
+
+
+      $scope.takehistorylog = function () {
+        $scope.maximoload = true
+
+        $scope.SearchWOClosed = true
+
+        if (!$scope.linktoMaximo) {
+          $scope.woClosed2 = [{
+              "WONUM": "1606_LU-PK",
+              "DESCRIPTION": "X01_line_13000_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
+            },
+            {
+              "WONUM": "1609_LU-PK",
+              "DESCRIPTION": "X01_line_13000_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
+            },
+            {
+              "WONUM": "1610_LU-PK",
+              "DESCRIPTION": "X01_line_13500_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
+            },
+            {
+              "WONUM": "1608_LU-PK",
+              "DESCRIPTION": "X01_line_12250_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
+            },
+            {
+              "WONUM": "168B_LU-PK",
+              "DESCRIPTION": "X01_line_12500_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
+            },
+            {
+              "WONUM": "1703_LU-PK",
+              "DESCRIPTION": "X01_line_14500_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
+            },
+            {
+              "WONUM": "173A_LU-PK",
+              "DESCRIPTION": "X01_line_14500_HRS_PK_REPORTED",
+              "LOCATION": "X01_line",
+              "ASSETNUM": "FS-PK-10047"
+            }
+          ]
+      
+
+          $scope.woClosed=[];
+          $scope.woClosed2.forEach(function(item,idx){
+            var wonum=item.WONUM.split("_")[0]+"_"+$scope.macchinaselezionata;
+            var descr=item.DESCRIPTION.replace("_PK_","_"+$scope.macchinaselezionata+"_");
+            var assetnum=item.ASSETNUM.replace("-PK-","-"+$scope.macchinaselezionata+"-")
+          
+           
+
+            var newwo={
+              WONUM: wonum,
+              DESCRIPTION: descr,
+              LOCATION: item.LOCATION,
+              ASSETNUM: assetnum
+
+            }
+
+            $scope.woClosed.push(newwo);
+          })
+
+              console.log("woclosed",$scope.woClosed);
+          $scope.maximoload = false
+          $scope.SearchWOClosed = false
+          return;
+        }
+
+        var url = "http://172.17.196.115/maxrest/rest/mbo/workorder?_lid=maxadmin&_lpwd=maxadmin&_compact=True&_format=json&_urs=False&wonum=LU-PK&assetnum=gd&status=close"
+        $http.get(url)
+          .then(function (response) {
+            $scope.content = response.data;
+            $scope.statuscode = response.status;
+            $scope.statustext = response.statustext;
+
+            $scope.woClosed = [];
+            angular.forEach(response.data.WORKORDERMboSet, function (wotemp) {
+              angular.forEach(wotemp, function (wotempor) {
+                $scope.woClosed.push(wotempor)
+              })
+            })
+
+            $scope.maximoload = false
+            $scope.SearchWOClosed = false
+            console.log($scope.woClosed)
+          });
+
+      }
+
+
+
+      // WPMATERIAL.ITEMNUM : 2NGBMA1
+
+
+      $scope.hide = function () {
+        $mdDialog.hide();
+      };
+
+      $scope.cancel = function () {
+        $mdDialog.cancel();
+      };
+
+      $scope.answer = function (answer) {
+        $mdDialog.hide(answer);
+      };
+    }
+	
+	
+	
+	
     function StopsController($scope, $mdDialog, backend, $timeout, $http) {
 
       $scope.ShowMaximoLoad = false
@@ -3373,6 +3531,14 @@ angular.module('iotapp', [
       $scope.PrePostventLoading = false
 
       $scope.selectedMachine = machine;
+	  
+ 
+	  if (machine.name == 'Machine_02') {
+		$scope.showpopupmaximo = true
+	  } else {
+        $scope.showpopupmaximo = true
+      }	  
+
       console.log("machine", machine);
       if (machine == "121P") {
         $scope.linecampo = "True_duration";

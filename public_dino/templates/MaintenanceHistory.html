@@ -1,0 +1,58 @@
+<md-dialog aria-label="Technical Screen" class="large-dialogFullScreen">
+	<form ng-cloak>
+		<md-toolbar>
+			<div class="md-toolbar-tools" style="background: #325c80;">
+				<h2 style="color: #ffffff">MAINTENANCE History</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<ng-md-icon icon="close" style="fill: white" xsize="30"></ng-md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<!-- INIZIO -->
+				
+
+<div layout="column" >
+
+					<div flex="50" layout="column" class="boxWithHeight" layout-padding style="box-sizing: border-box; height: 100%;">
+							<div class="boxheader" sstyle="font-size: 15px; font-family: 'HelvLightIBM','Helvetica Neue',Arial,sans-serif; background: #cf142b; color: #ffffff">
+      History Log (WO Closed) for {{macchinaselezionata}}
+    </div>
+							<md-progress-linear ng-if="SearchWOClosed" md-mode="indeterminate"></md-progress-linear>
+							<section flex>
+								<div class="item item-text-wrap" style="text-align: left; vertical-align: top; overflow: auto; height: 250px;" ng-init="takehistorylog()">
+									<table ng-show="!ShowMaximoLoad" class="dialogtable" id="tablemaximo" style="width:100%;">
+										<tr>
+											<th ng-click="takehistorylog()">WO</th>
+											<th>Description</th>
+											<th>Location</th>
+											<th>Asset</th>
+										</tr>
+										<tbody>
+											<tr ng-repeat="wo in woClosed">
+												<td>{{wo.WONUM}}</td>
+												<td>{{wo.DESCRIPTION}}</td>
+												<td>{{wo.LOCATION}}</td>
+												<td>{{wo.ASSETNUM}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</section>
+
+					</div>
+
+					</div>
+				<!-- FINE CONTENUTO -->
+			</div>
+		</md-dialog-content>
+	<!--	<md-dialog-actions layout="row">
+			<md-button ng-click="answer('Close')">
+				Close
+			</md-button>
+		</md-dialog-actions>
+	-->
+	</form>
+</md-dialog>

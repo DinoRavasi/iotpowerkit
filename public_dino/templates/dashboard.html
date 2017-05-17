@@ -130,8 +130,6 @@
     <div layout="row" flex style="padding: 2px; background-color: #325c80;">
             <div layout="row" layout-sm="column" class="upperdashrow" flex>
 			
-			
-
                 <div class="parent" layout="column" flex>
                     <md-card >
                          <div ng-click="getOperationShutdownTime()" class="cardhead boxheader">Operation Shutdown Time</div>
@@ -250,7 +248,9 @@
                     <md-button ng-click="setDash(0)" ng-class="activedash==0 ? 'md-raised md-warn' : 'md-raised md-primary'">Equipment Monitoring</md-button>
                     <md-button ng-click="setDash(1)" ng-class="activedash==1 ? 'md-raised md-warn' : 'md-raised md-primary'">Anomaly Detection</md-button>
                     <md-button ng-click="setDash(2)" ng-class="activedash==2 ? 'md-raised md-warn' : 'md-raised md-primary'">Failure Prediction</md-button>
-                    <md-button ng-click="ShowMobileScreen($event,LastWOMaximoCreated,selectedMachine.name)" class="md-raised md-primary">Maintenance</md-button>
+
+					<md-button ng-click="ShowMobileScreenMntHistory($event,selectedMachine.name)" class="md-raised md-primary">Maintenance History</md-button>
+					<md-button ng-click="ShowMobileScreen($event,LastWOMaximoCreated,selectedMachine.name)" class="md-raised md-primary">WorkOrder</md-button>
                 </section>
             </div>
             <div class="box3" style="height:90%; max-height:90%; flex:1 1 90%; background-color: #ffffff;">
